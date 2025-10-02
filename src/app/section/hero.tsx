@@ -83,7 +83,7 @@ export default function Hero() {
         </h1>
         <VoiceCallButton 
           apiKey="5c2e1220-d870-46c4-9088-240fb4a0c7cb"
-          assistantId="3dbf7ea9-0092-406d-91da-dab0e38e373d"
+          assistantId="c3b9fdb0-5d8a-431d-b324-9b5d5c4821e7"
         />
         <p className="text-lg md:text-lg lg:text-xl xl:text-xl font-medium text-[#19331B] py-6 md:py-7 lg:py-8 xl:py-[30px]">
           Turn every customer who calls into an appointment
