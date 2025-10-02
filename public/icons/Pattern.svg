@@ -1,0 +1,9 @@
+<svg viewBox="0 0 804 348" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="804.000000" height="348.000000" fill="none" customFrame="#000000">
+	<defs>
+		<radialGradient id="paint_radial_1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(549.891,0,0,238.013,402,174)">
+			<stop stop-color="rgb(28,94,32)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(255,255,255)" offset="1" stop-opacity="0" />
+		</radialGradient>
+	</defs>
+	<path id="Vector" d="M71.1333 0L71.1333 348M173.016 0L173.016 348M274.899 0L274.899 348M376.781 0L376.781 348M478.664 0L478.664 348M580.547 0L580.547 348M682.429 0L682.429 348M784.312 0L784.312 348M631.488 0L631.488 348M529.605 0L529.605 348M427.723 0L427.723 348M325.84 0L325.84 348M223.957 0L223.957 348M122.075 0L122.075 348M20.192 0L20.192 348M733.37 0L733.37 348M0 325.024L804 325.024M0 203.966L804 203.966M0 82.9068L804 82.9069M0 264.495L804 264.495M0 22.3773L804 22.3774M0 143.436L804 143.436" opacity="0.300000012" stroke="url(#paint_radial_1)" stroke-width="1.66501355" />
+</svg>

@@ -1,0 +1,29 @@
+[00:00:00] AI: Hi, thanks for calling HVAC iFlow. This is Vickie, your AI assistant. How can I help you today?  
+[00:00:04] CUSTOMER: Hi, Vickie. My air conditioner is not working anymore.  
+[00:00:11] AI: I'm sorry to hear your air conditioner stopped working, especially with how hot it's been lately.  
+[00:00:15] AI: Can you tell me your zip code or what city you're in so I can check availability in your area?  
+[00:00:20] CUSTOMER: I'm in Boston, Massachusetts.  
+[00:00:23] AI: Thanks for letting me know you're in Boston.  
+[00:00:25] AI: Is your AC completely not turning on or is it just not cooling properly and is this something  
+[00:00:29] AI: that needs urgent attention or can it wait a day or so?  
+[00:00:32] CUSTOMER: It's not cooling properly.  
+[00:00:34] AI: Got it.  
+[00:00:36] AI: So the AC is running but not cooling as it should.  
+[00:00:39] AI: Would you say this needs immediate attention or is it more of a comfort issue that can  
+[00:00:42] AI: wait a day?  
+[00:00:43] CUSTOMER: I think it can wait a day.  
+[00:00:47] AI: Thanks for clarifying. To make sure our technician comes prepared and you're not stuck waiting for a 
+[00:00:52] AI: second visit, I'd like to send a quick form to your phone. It saves you time since you won't  
+[00:00:56] AI: have to repeat your info and it helps us match you with the right tech for your system.  
+[00:01:00] AI: Would you like me to send that form now?
+[00:01:03] CUSTOMER: Yes, please  
+[00:01:06] AI: Hold on a sec...  
+[00:01:09] AI: I've sent that form to your phone. You should get it in the next minute or so. Once you fill it out, our team  
+[00:01:13] AI: will reach out within two hours to get your AC issue sorted. Is there anything else about your  
+[00:01:17] AI: heating or cooling I can help with right now?
+[00:01:20] CUSTOMER: No, thanks so much.  
+[00:01:23] AI: You're very welcome. 
+[00:01:25] AI: Once you submit that form, we'll handle the rest and get your AC back to normal.  
+[00:01:30] AI: Thanks for choosing HVAC iFlow.  
+[00:01:31] AI: Have a great day and stay cool.  
+[00:01:33] CUSTOMER: Thanks you.

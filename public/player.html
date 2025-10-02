@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Transcript Audio Player</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            touch-action: manipulation;
+        }
+
+        .iphone-frame {
+            width: 320px;
+            height: 680px;
+            /* background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); */
+            border-radius: 40px;
+            padding: 8px;
+            position: relative;
+            /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.1), 0 0 60px rgba(0, 0, 0, 0.05); */
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+            border-radius: 32px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 32px;
+            background: linear-gradient(135deg, #1c1c1e 0%, #2c2c2e 100%);
+            border-radius: 19px;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .dynamic-island::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #007AFF;
+            border-radius: 50%;
+            animation: islandPulse 2s ease-in-out infinite;
+        }
+
+        .dynamic-island::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #34C759;
+            border-radius: 50%;
+        }
+
+        @keyframes islandPulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .player-container {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            padding: 60px 10px 10px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            color: #1c1c1e;
+            gap: 10px;
+        }
+
+        .player-controls {
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .mood-indicator {
+            text-align: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        .mood-text {
+            color: #1c1c1e;
+            font-size: 14px;
+            font-weight: 500;
+            animation: moodPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes moodPulse {
+
+            0%,
+            100% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.02);
+            }
+        }
+
+        .player-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+
+
+
+        .waveform-container {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.3s forwards;
+            flex-shrink: 0;
+        }
+
+        .waveform-bar {
+            width: 4px;
+            background: #80C783;
+            border-radius: 2px;
+            transition: all 0.1s ease;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .waveform-bar:nth-child(odd) {
+            animation-delay: 0.1s;
+        }
+
+        .waveform-bar:nth-child(even) {
+            animation-delay: 0.3s;
+        }
+
+        .progress-container {
+            margin: 20px 0;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.4s forwards;
+            flex-shrink: 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .progress-bar:hover {
+            height: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #80C783;
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 13px;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.5s forwards;
+            flex-shrink: 0;
+        }
+
+        .control-btn {
+            width: 56px;
+            height: 56px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #1c1c1e;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 20px;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent);
+            transition: left 0.5s;
+        }
+
+        .control-btn:hover::before {
+            left: 100%;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .control-btn:active {
+            transform: scale(0.95) translateY(0);
+            transition: all 0.1s ease;
+        }
+
+        .play-btn {
+            width: 80px;
+            height: 80px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(-90deg, #A4D6A8 0%, #2F7D33 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 30px #2f7d3371, 0 0 0 1px rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .play-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .play-btn:hover::before {
+            left: 100%;
+        }
+
+        .play-btn.playing {
+            background: linear-gradient(135deg, #FF3B30 0%, #D70015 50%, #B8000F 100%);
+            box-shadow: 0 8px 30px rgba(255, 59, 48, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .play-btn:hover {
+            background: linear-gradient(-90deg, #A4D6A8 0%, #2F7D33 100%);
+            box-shadow: 0 12px 40px #2f7d3371, 0 0 0 1px rgba(255, 255, 255, 0.2);
+            transform: scale(1.08) translateY(-3px);
+        }
+
+        .play-btn.playing:hover {
+            background: linear-gradient(135deg, #CC2E24 0%, #FF3B30 50%, #D70015 100%);
+            box-shadow: 0 12px 40px rgba(255, 59, 48, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .play-btn:active {
+            transform: scale(0.95) translateY(0);
+            transition: all 0.1s ease;
+        }
+
+        .transcript-container {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+            max-height: 60vh;
+        }
+
+
+
+        .transcript-text {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            line-height: 1.8;
+            font-size: 15px;
+            color: #1c1c1e;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        .chat-message {
+            margin: 12px 0;
+            padding: 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: messageSlideIn 0.4s ease-out;
+            max-width: 85%;
+        }
+
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-message.ai {
+            justify-content: flex-start;
+        }
+
+        .chat-message.customer {
+            justify-content: flex-end;
+            flex-direction: row-reverse;
+            margin-left: auto;
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .chat-message.ai .message-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .chat-message.customer .message-avatar {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .message-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 0;
+        }
+
+        .chat-message[data-speaker="Customer"] .message-content {
+            align-items: flex-end;
+        }
+
+        .message-bubble {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 14px 18px;
+            color: #1c1c1e;
+            font-size: 14px;
+            line-height: 1.5;
+            position: relative;
+            word-wrap: break-word;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            font-weight: 400;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: rgba(28, 28, 30, 0.6);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            text-align: right;
+        }
+
+        .chat-message.ai .message-time {
+            text-align: left;
+        }
+
+        .chat-message.active .message-bubble {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2) 0%, rgba(155, 89, 182, 0.2) 100%) !important;
+            border-color: rgba(52, 152, 219, 0.4);
+            box-shadow: 0 0 24px rgba(52, 152, 219, 0.2), 0 4px 20px rgba(0, 0, 0, 0.08);
+            animation: activePulse 2s ease-in-out infinite;
+            transform: scale(1.02);
+        }
+
+        @keyframes activePulse {
+            0%, 100% {
+                box-shadow: 0 0 24px rgba(52, 152, 219, 0.2), 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
+            50% {
+                box-shadow: 0 0 32px rgba(52, 152, 219, 0.3), 0 6px 24px rgba(0, 0, 0, 0.12);
+            }
+        }
+
+        .chat-message[data-speaker="AI"] .message-bubble {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.15) 0%, rgba(52, 152, 219, 0.15) 100%);
+            border-color: rgba(46, 204, 113, 0.3);
+        }
+
+        .chat-message[data-speaker="Customer"] .message-bubble {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15) 0%, rgba(155, 89, 182, 0.15) 100%);
+            border-color: rgba(52, 152, 219, 0.3);
+        }
+
+        .message-bubble:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                height: 20px;
+                opacity: 0.6;
+            }
+
+            50% {
+                height: 60px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="iphone-frame">
+        <div class="iphone-screen">
+            <div class="dynamic-island"></div>
+            <div class="player-container">
+                <div class="transcript-container">
+                    <div class="mood-indicator" id="moodIndicator">
+                        <span class="mood-text">🎵 Ready to play</span>
+                    </div>
+                    <div class="transcript-text" id="transcriptText">
+                            <div class="chat-message ai" data-message-index="0">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Hi, thanks for calling HVAC iFlow. This is Vickie, your AI assistant. How can I help you today?
+                                    </div>
+                                    <div class="message-time">0:00</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message customer" data-message-index="1">
+                                <div class="message-avatar">👤</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Hi, Vickie. My air conditioner is not working anymore.
+                                    </div>
+                                    <div class="message-time">0:04</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="2">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        I'm sorry to hear your air conditioner stopped working, especially with how hot it's been lately.
+                                    </div>
+                                    <div class="message-time">0:11</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="3">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Can you tell me your zip code or what city you're in so I can check availability in your area?
+                                    </div>
+                                    <div class="message-time">0:15</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message customer" data-message-index="4">
+                                <div class="message-avatar">👤</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        I'm in Boston, Massachusetts.
+                                    </div>
+                                    <div class="message-time">0:20</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="5">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Thanks for letting me know you're in Boston.
+                                    </div>
+                                    <div class="message-time">0:23</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="6">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Is your AC completely not turning on or is it just not cooling properly and is this something
+                                    </div>
+                                    <div class="message-time">0:25</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="7">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        that needs urgent attention or can it wait a day or so?
+                                    </div>
+                                    <div class="message-time">0:29</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message customer" data-message-index="8">
+                                <div class="message-avatar">👤</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        It's not cooling properly.
+                                    </div>
+                                    <div class="message-time">0:32</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="9">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Got it.
+                                    </div>
+                                    <div class="message-time">0:34</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="10">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        So the AC is running but not cooling as it should.
+                                    </div>
+                                    <div class="message-time">0:36</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="11">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Would you say this needs immediate attention or is it more of a comfort issue that can
+                                    </div>
+                                    <div class="message-time">0:39</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="12">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        wait a day?
+                                    </div>
+                                    <div class="message-time">0:42</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message customer" data-message-index="13">
+                                <div class="message-avatar">👤</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        I think it can wait a day.
+                                    </div>
+                                    <div class="message-time">0:43</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="14">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Thanks for clarifying. To make sure our technician comes prepared and you're not stuck waiting for a
+                                    </div>
+                                    <div class="message-time">0:47</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="15">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        second visit, I'd like to send a quick form to your phone. It saves you time since you won't
+                                    </div>
+                                    <div class="message-time">0:52</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="16">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        have to repeat your info and it helps us match you with the right tech for your system.
+                                    </div>
+                                    <div class="message-time">0:56</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="17">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Would you like me to send that form now?
+                                    </div>
+                                    <div class="message-time">1:00</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message customer" data-message-index="18">
+                                <div class="message-avatar">👤</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Yes, please
+                                    </div>
+                                    <div class="message-time">1:03</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="19">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Hold on a sec...
+                                    </div>
+                                    <div class="message-time">1:06</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="20">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        I've sent that form to your phone. You should get it in the next minute or so. Once you fill it out, our team
+                                    </div>
+                                    <div class="message-time">1:09</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="21">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        will reach out within two hours to get your AC issue sorted. Is there anything else about your
+                                    </div>
+                                    <div class="message-time">1:13</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="22">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        heating or cooling I can help with right now?
+                                    </div>
+                                    <div class="message-time">1:17</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message customer" data-message-index="23">
+                                <div class="message-avatar">👤</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        No, thanks so much.
+                                    </div>
+                                    <div class="message-time">1:20</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="24">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        You're very welcome.
+                                    </div>
+                                    <div class="message-time">1:23</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="25">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Once you submit that form, we'll handle the rest and get your AC back to normal.
+                                    </div>
+                                    <div class="message-time">1:25</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="26">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Thanks for choosing HVAC iFlow.
+                                    </div>
+                                    <div class="message-time">1:30</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message ai" data-message-index="27">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Have a great day and stay cool.
+                                    </div>
+                                    <div class="message-time">1:31</div>
+                                </div>
+                            </div>
+                        
+                            <div class="chat-message customer" data-message-index="28">
+                                <div class="message-avatar">👤</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        Thanks you.
+                                    </div>
+                                    <div class="message-time">1:33</div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="player-controls">
+                    <div class="waveform-container" id="waveform"><div class="waveform-bar" style="height: 16.2207px;"></div><div class="waveform-bar" style="height: 37.2919px;"></div><div class="waveform-bar" style="height: 37.2478px;"></div><div class="waveform-bar" style="height: 23.9991px;"></div><div class="waveform-bar" style="height: 44.8164px;"></div><div class="waveform-bar" style="height: 31.0854px;"></div><div class="waveform-bar" style="height: 17.9963px;"></div><div class="waveform-bar" style="height: 34.2537px;"></div><div class="waveform-bar" style="height: 30.7682px;"></div><div class="waveform-bar" style="height: 18.5571px;"></div><div class="waveform-bar" style="height: 28.255px;"></div><div class="waveform-bar" style="height: 40.7612px;"></div><div class="waveform-bar" style="height: 44.6741px;"></div><div class="waveform-bar" style="height: 42.1644px;"></div><div class="waveform-bar" style="height: 22.7952px;"></div><div class="waveform-bar" style="height: 17.3692px;"></div><div class="waveform-bar" style="height: 31.543px;"></div><div class="waveform-bar" style="height: 25.0211px;"></div><div class="waveform-bar" style="height: 28.0693px;"></div><div class="waveform-bar" style="height: 31.2813px;"></div><div class="waveform-bar" style="height: 39.842px;"></div><div class="waveform-bar" style="height: 40.1475px;"></div><div class="waveform-bar" style="height: 38.5927px;"></div><div class="waveform-bar" style="height: 30.3682px;"></div><div class="waveform-bar" style="height: 29.6093px;"></div><div class="waveform-bar" style="height: 33.8269px;"></div><div class="waveform-bar" style="height: 31.5911px;"></div><div class="waveform-bar" style="height: 29.8593px;"></div><div class="waveform-bar" style="height: 43.5733px;"></div><div class="waveform-bar" style="height: 23.3084px;"></div></div>
+
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">1:35</span>
+                        </div>
+                    </div>
+
+                    <div class="controls">
+                        <button class="control-btn" id="muteBtn">🔊</button>
+                        <button class="play-btn" id="playBtn">📞</button>
+                        <button class="control-btn" id="pauseBtn">⏸</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer" preload="metadata" src="voice/hvac.wav"></audio>
+
+    <script>
+        class TranscriptPlayer {
+            constructor() {
+                this.audioPlayer = document.getElementById('audioPlayer');
+                this.playBtn = document.getElementById('playBtn');
+                this.muteBtn = document.getElementById('muteBtn');
+                this.pauseBtn = document.getElementById('pauseBtn');
+                this.progressBar = document.getElementById('progressBar');
+                this.progressFill = document.getElementById('progressFill');
+                this.currentTimeEl = document.getElementById('currentTime');
+                this.durationEl = document.getElementById('duration');
+                this.transcriptText = document.getElementById('transcriptText');
+                this.waveform = document.getElementById('waveform');
+                this.moodIndicator = document.getElementById('moodIndicator');
+
+                this.isPlaying = false;
+                this.currentTrackIndex = 0;
+                this.audioFiles = [];
+                this.transcriptData = [];
+                this.currentAudioFile = null;
+
+                this.init();
+            }
+
+            async init() {
+                await this.loadAudioFiles();
+                this.setupEventListeners();
+                this.generateWaveform();
+                if (this.audioFiles.length > 0) {
+                    await this.loadTrack(0);
+                }
+            }
+
+            async loadAudioFiles() {
+                // Check for available audio files in voice/ folder
+                const audioExtensions = ['.wav'];
+                const possibleFiles = ['hvac'];
+                
+                this.audioFiles = [];
+
+                for (const fileName of possibleFiles) {
+                    for (const ext of audioExtensions) {
+                        try {
+                            const audioPath = `voice/${fileName}${ext}`;
+                            const response = await fetch(audioPath, { method: 'HEAD' });
+                            if (response.ok) {
+                                this.audioFiles.push({
+                                    name: fileName,
+                                    audioPath: audioPath,
+                                    transcriptPath: `voice/${fileName}.txt`
+                                });
+                                break; // Found audio file, move to next fileName
+                            }
+                        } catch (e) {
+                            // File doesn't exist, continue
+                        }
+                    }
+                }
+
+                if (this.audioFiles.length === 0) {
+                    this.transcriptText.innerHTML = '<div class="chat-message ai"><div class="message-bubble">No Audio Files Found - Add .wav/.mp3 files to voice/ folder</div></div>';
+                }
+            }
+
+            async parseTranscriptFile(transcriptPath) {
+                try {
+                    const response = await fetch(transcriptPath);
+                    if (!response.ok) {
+                        throw new Error('Transcript file not found');
+                    }
+
+                    const text = await response.text();
+                    const lines = text.split('\n')
+                        .filter(line => line.trim() &&
+                            !line.includes('Transcribed with') &&
+                            line.includes('[') &&
+                            line.includes(']'));
+
+                    const transcriptData = [];
+
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i];
+                        const match = line.match(/\[(\d{2}):(\d{2}):(\d{2})\]\s*(.+)/);
+                        if (match) {
+                            const [, hours, minutes, seconds, textPart] = match;
+                            const lineStartTime = parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
+
+                            // Extract speaker and text
+                            const speakerMatch = textPart.match(/^(AI|CUSTOMER):\s*(.*)$/);
+
+                            if (speakerMatch) {
+                                const speaker = speakerMatch[1];
+                                const text = speakerMatch[2].trim();
+
+                                if (text) {
+                                    // Get next line's timestamp to calculate duration
+                                    let lineEndTime = lineStartTime + 3; // Default 3 seconds
+                                    if (i + 1 < lines.length) {
+                                        const nextMatch = lines[i + 1].match(/\[(\d{2}):(\d{2}):(\d{2})\]/);
+                                        if (nextMatch) {
+                                            const [, nextHours, nextMinutes, nextSeconds] = nextMatch;
+                                            lineEndTime = parseInt(nextHours) * 3600 + parseInt(nextMinutes) * 60 + parseInt(nextSeconds);
+                                        }
+                                    }
+
+                                    // Split text into words and calculate timing for each word
+                                    const words = text.split(/\s+/).filter(word => word.trim());
+                                    const lineDuration = lineEndTime - lineStartTime;
+                                    const timePerWord = lineDuration / words.length;
+
+                                    words.forEach((word, wordIndex) => {
+                                        const wordStart = lineStartTime + (wordIndex * timePerWord);
+                                        const wordEnd = wordStart + timePerWord;
+
+                                        transcriptData.push({
+                                            text: word,
+                                            start: wordStart,
+                                            end: wordEnd,
+                                            speaker: speaker,
+                                            isWord: true,
+                                            messageIndex: transcriptData.filter(item => item.speaker === speaker && item.isFirstWord).length,
+                                            isFirstWord: wordIndex === 0
+                                        });
+                                    });
+                                }
+                            }
+                        }
+                    }
+
+                    return transcriptData;
+                } catch (error) {
+                    console.error('Error parsing transcript:', error);
+                    return [];
+                }
+            }
+
+            setupEventListeners() {
+                // Event listeners
+                this.playBtn.addEventListener('click', () => {
+                    if (this.isPlaying) {
+                        // If playing (red state), reset to default
+                        this.resetToDefault();
+                    } else {
+                        // If not playing (blue state), start playing
+                        this.togglePlay();
+                    }
+                });
+                this.pauseBtn.addEventListener('click', () => this.togglePlay());
+                this.muteBtn.addEventListener('click', () => this.toggleMute());
+                // Play/Pause button
+
+
+
+                // Progress bar
+                this.progressBar.addEventListener('click', (e) => {
+                    const rect = this.progressBar.getBoundingClientRect();
+                    const percent = (e.clientX - rect.left) / rect.width;
+                    this.audioPlayer.currentTime = percent * this.audioPlayer.duration;
+                });
+
+                // Audio events
+                this.audioPlayer.addEventListener('loadedmetadata', () => {
+                    this.updateDuration();
+                });
+
+                this.audioPlayer.addEventListener('timeupdate', () => {
+                    this.updateProgress();
+                    this.updateTranscriptTracking();
+                });
+
+                this.audioPlayer.addEventListener('ended', () => {
+                    this.isPlaying = false;
+                    this.pauseBtn.innerHTML = '▶';
+                    this.playBtn.classList.remove('playing');
+                    this.stopWaveformAnimation();
+                    this.updateMood('✅ Conversation ended');
+                    this.clearActiveTranscript();
+                });
+
+                this.audioPlayer.addEventListener('play', () => {
+                    this.isPlaying = true;
+                    this.pauseBtn.innerHTML = '⏸';
+                    this.playBtn.classList.add('playing');
+                    this.animateWaveform();
+                    this.updateMood('🎵 Playing conversation');
+                });
+
+                this.audioPlayer.addEventListener('pause', () => {
+                    this.isPlaying = false;
+                    this.pauseBtn.innerHTML = '▶';
+                    this.playBtn.classList.remove('playing');
+                    this.stopWaveformAnimation();
+                    this.updateMood('⏸ Paused');
+                });
+            }
+
+            async loadTrack(index) {
+                if (index >= 0 && index < this.audioFiles.length) {
+                    const file = this.audioFiles[index];
+                    this.currentAudioFile = file;
+                    this.audioPlayer.src = file.audioPath;
+
+                    // Load transcript
+                    this.transcriptData = await this.parseTranscriptFile(file.transcriptPath);
+                    this.updateTranscriptDisplay();
+                }
+            }
+
+            resetToDefault() {
+                this.audioPlayer.pause();
+                this.audioPlayer.currentTime = 0;
+                this.isPlaying = false;
+                this.pauseBtn.innerHTML = '▶';
+                this.playBtn.classList.remove('playing');
+                this.stopWaveformAnimation();
+                this.updateProgress();
+                this.updateMood('🎵 Ready to play');
+                this.clearActiveTranscript();
+            }
+
+            togglePlay() {
+                if (this.audioPlayer.src) {
+                    if (this.isPlaying) {
+                        this.audioPlayer.pause();
+                        this.pauseBtn.innerHTML = '▶';
+                        this.playBtn.classList.remove('playing');
+                        this.stopWaveformAnimation();
+                        this.updateMood('⏸ Paused');
+                    } else {
+                        this.audioPlayer.play();
+                        this.pauseBtn.innerHTML = '⏸';
+                        this.playBtn.classList.add('playing');
+                        this.animateWaveform();
+                        this.updateMood('🎵 Playing conversation');
+                    }
+                    this.isPlaying = !this.isPlaying;
+                }
+            }
+
+            toggleMute() {
+                if (this.audioPlayer.muted) {
+                    this.audioPlayer.muted = false;
+                    this.muteBtn.innerHTML = '🔊';
+                } else {
+                    this.audioPlayer.muted = true;
+                    this.muteBtn.innerHTML = '🔇';
+                }
+            }
+
+
+
+            updateProgress() {
+                if (this.audioPlayer.duration) {
+                    const percent = (this.audioPlayer.currentTime / this.audioPlayer.duration) * 100;
+                    this.progressFill.style.width = percent + '%';
+                    this.currentTimeEl.textContent = this.formatTime(this.audioPlayer.currentTime);
+                }
+            }
+
+            updateDuration() {
+                this.durationEl.textContent = this.formatTime(this.audioPlayer.duration);
+            }
+
+
+
+            updateTranscriptDisplay() {
+                if (this.transcriptData && this.transcriptData.length > 0) {
+                    // Group words by speaker and message
+                    const messages = [];
+                    let currentMessage = null;
+                    let messageIndex = 0;
+
+                    this.transcriptData.forEach((word, index) => {
+                        if (word.isFirstWord || !currentMessage || currentMessage.speaker !== word.speaker) {
+                            if (currentMessage) {
+                                messages.push(currentMessage);
+                                messageIndex++;
+                            }
+                            currentMessage = {
+                                speaker: word.speaker,
+                                words: [],
+                                startTime: word.start,
+                                messageIndex: messageIndex
+                            };
+                        }
+                        currentMessage.words.push({ ...word, originalIndex: index, messageIndex: messageIndex });
+                    });
+
+                    if (currentMessage) {
+                        messages.push(currentMessage);
+                    }
+
+                    // Update transcript data with correct message indices
+                    this.transcriptData.forEach(word => {
+                        const message = messages.find(msg =>
+                            word.start >= msg.startTime &&
+                            word.speaker === msg.speaker &&
+                            msg.words.some(w => w.originalIndex === this.transcriptData.indexOf(word))
+                        );
+                        if (message) {
+                            word.messageIndex = message.messageIndex;
+                        }
+                    });
+
+                    // Create chat bubble HTML
+                    this.transcriptText.innerHTML = messages.map((message, index) => {
+                        const messageText = message.words.map(word => word.text).join(' ');
+                        const messageClass = message.speaker.toLowerCase();
+                        const avatar = message.speaker === 'AI' ? '🤖' : '👤';
+                        const timestamp = this.formatTime(message.startTime);
+
+                        return `
+                            <div class="chat-message ${messageClass}" data-message-index="${index}">
+                                <div class="message-avatar">${avatar}</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        ${messageText}
+                                    </div>
+                                    <div class="message-time">${timestamp}</div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    this.transcriptText.innerHTML = '<span class="transcript-word">No transcript available for this audio file.</span>';
+                }
+            }
+
+            generateWaveform() {
+                this.waveform.innerHTML = '';
+                for (let i = 0; i < 30; i++) {
+                    const bar = document.createElement('div');
+                    bar.className = 'waveform-bar';
+                    bar.style.height = Math.random() * 30 + 15 + 'px';
+                    this.waveform.appendChild(bar);
+                }
+            }
+
+            animateWaveform() {
+                const bars = this.waveform.querySelectorAll('.waveform-bar');
+                bars.forEach(bar => {
+                    bar.style.animationPlayState = 'running';
+                });
+            }
+
+            stopWaveformAnimation() {
+                const bars = this.waveform.querySelectorAll('.waveform-bar');
+                bars.forEach(bar => {
+                    bar.style.animationPlayState = 'paused';
+                });
+            }
+
+            updateMood(text) {
+                const moodText = this.moodIndicator.querySelector('.mood-text');
+                if (moodText) {
+                    moodText.textContent = text;
+                }
+            }
+
+            updateTranscriptTracking() {
+                if (!this.transcriptData || this.transcriptData.length === 0) return;
+
+                const currentTime = this.audioPlayer.currentTime;
+                const chatMessages = document.querySelectorAll('.chat-message');
+
+                // Clear all active states
+                chatMessages.forEach(msg => msg.classList.remove('active'));
+
+                // Find current message based on timing
+                for (let i = 0; i < this.transcriptData.length; i++) {
+                    const segment = this.transcriptData[i];
+                    if (currentTime >= segment.start && currentTime <= segment.end) {
+                        // Find the message by data-message-index attribute
+                        const messageIndex = segment.messageIndex || 0;
+                        const activeMessage = document.querySelector(`[data-message-index="${messageIndex}"]`);
+
+                        if (activeMessage) {
+                            activeMessage.classList.add('active');
+                            // Auto-scroll to active message
+                            activeMessage.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center'
+                            });
+
+                            // Update mood based on speaker
+                            const speaker = segment.speaker;
+                            if (speaker === 'AI') {
+                                this.updateMood('🤖 AI Speaking');
+                            } else {
+                                this.updateMood('👤 Customer Speaking');
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            clearActiveTranscript() {
+                const chatMessages = document.querySelectorAll('.chat-message');
+                chatMessages.forEach(msg => msg.classList.remove('active'));
+            }
+
+            formatTime(seconds) {
+                if (isNaN(seconds)) return '0:00';
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+        }
+
+        // Initialize the player when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new TranscriptPlayer();
+        });
+    </script>
+
+
+</body></html>

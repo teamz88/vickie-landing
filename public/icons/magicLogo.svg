@@ -1,0 +1,85 @@
+<svg viewBox="0 0 312.616 312.034" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="312.616211" height="312.034180" fill="none" customFrame="#000000">
+	<defs>
+		<g id="pixso_custom_effect_0">
+			<effect x="20.000000" y="14.000000" visibility="visible" fill="rgb(46.3979,201.058,55.7712)" fill-opacity="0.300000012" effectType="dropShadow" stdDeviation="94" radius="0" />
+		</g>
+		<filter id="filter_0" width="312.616211" height="312.034180" x="0.000000" y="0.000000" filterUnits="userSpaceOnUse" customEffect="url(#pixso_custom_effect_0)" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix" />
+			<feOffset dx="20.000000" dy="14.000000" in="SourceAlpha" />
+			<feGaussianBlur stdDeviation="31.333334" />
+			<feColorMatrix type="matrix" values="0 0 0 0 0.181953 0 0 0 0 0.788462 0 0 0 0 0.218711 0 0 0 0.3 0 " />
+			<feBlend result="effect_dropShadow_1" in2="BackgroundImageFix" mode="normal" />
+			<feBlend result="shape" in="SourceGraphic" in2="effect_dropShadow_1" mode="normal" />
+		</filter>
+		<linearGradient id="paint_linear_0" x1="115.198013" x2="204.387207" y1="112.348892" y2="221.114639" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(193.702,255,197.417)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(255,255,255)" offset="1" stop-opacity="1" />
+		</linearGradient>
+		<g id="pixso_custom_effect_1">
+			<effect x="0.000000" y="12.338239" visibility="visible" fill="rgb(28,94,32)" fill-opacity="0.5" effectType="dropShadow" stdDeviation="39.055275" radius="0" />
+		</g>
+		<filter id="filter_1" width="179.068848" height="179.068848" x="46.182129" y="64.564453" filterUnits="userSpaceOnUse" customEffect="url(#pixso_custom_effect_1)" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix" />
+			<feColorMatrix result="hardAlpha" in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0 " />
+			<feOffset dx="0.000000" dy="12.338239" in="hardAlpha" />
+			<feGaussianBlur stdDeviation="13.018425" />
+			<feComposite k2="-1" k3="1" in2="hardAlpha" operator="out" />
+			<feColorMatrix type="matrix" values="0 0 0 0 0.109804 0 0 0 0 0.368627 0 0 0 0 0.12549 0 0 0 0.5 0 " />
+			<feBlend result="effect_dropShadow_1" in2="BackgroundImageFix" mode="normal" />
+			<feBlend result="shape" in="SourceGraphic" in2="effect_dropShadow_1" mode="normal" />
+		</filter>
+		<linearGradient id="paint_linear_1" x1="99.3083191" x2="176.015686" y1="98.4173737" y2="183.462479" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(28,94,32)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(255,255,255)" offset="0.519230783" stop-opacity="0" />
+			<stop stop-color="rgb(28,94,32)" offset="1" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_2" x1="162.758423" x2="138.438904" y1="145.239349" y2="116.788345" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(255,55,223)" offset="0.00265844003" stop-opacity="1" />
+			<stop stop-color="rgb(110,0,255)" offset="1" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_3" x1="168.753021" x2="152.539993" y1="145.626373" y2="126.659027" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(255,55,223)" offset="0.00265844003" stop-opacity="1" />
+			<stop stop-color="rgb(110,0,255)" offset="1" stop-opacity="1" />
+		</linearGradient>
+	</defs>
+	<g id="Group 1577708403">
+		<g filter="url(#filter_0)">
+			<ellipse id="Ellipse 10" rx="62.308186" ry="62.017029" cx="136.308182" cy="142.017029" fill="url(#paint_linear_0)" />
+		</g>
+		<g id="Group 1577706832">
+			<g filter="url(#filter_1)">
+				<circle id="Ellipse 9" cx="135.716553" cy="141.760498" r="50.479248" fill="rgb(255,255,255)" />
+				<circle id="Ellipse 9" cx="135.716553" cy="141.760498" r="50.2419739" stroke="url(#paint_linear_1)" stroke-width="0.474547625" />
+			</g>
+			<g id="Group 1577708390">
+				<g id="Group">
+					<path id="Vector" d="M149.646 112.993C149.552 112.576 149.182 112.281 148.755 112.281C148.328 112.281 147.958 112.576 147.864 112.993L147.358 115.216C147.124 116.245 146.321 117.048 145.292 117.282L143.069 117.788C142.653 117.882 142.357 118.252 142.357 118.679C142.357 119.106 142.653 119.475 143.069 119.57L145.292 120.076C146.321 120.31 147.124 121.113 147.358 122.141L147.864 124.365C147.958 124.781 148.328 125.076 148.755 125.076C149.182 125.076 149.552 124.781 149.646 124.365L150.152 122.141C150.386 121.113 151.189 120.31 152.218 120.076L154.441 119.57C154.857 119.475 155.153 119.106 155.153 118.679C155.153 118.252 154.857 117.882 154.441 117.788L152.218 117.282C151.189 117.048 150.386 116.245 150.152 115.216L149.646 112.993Z" fill="url(#paint_linear_2)" fill-rule="evenodd" />
+					<path id="Vector" d="M149.646 112.993C149.552 112.576 149.182 112.281 148.755 112.281C148.328 112.281 147.958 112.576 147.864 112.993L147.358 115.216C147.124 116.245 146.321 117.048 145.292 117.282L143.069 117.788C142.653 117.882 142.357 118.252 142.357 118.679C142.357 119.106 142.653 119.475 143.069 119.57L145.292 120.076C146.321 120.31 147.124 121.113 147.358 122.141L147.864 124.365C147.958 124.781 148.328 125.076 148.755 125.076C149.182 125.076 149.552 124.781 149.646 124.365L150.152 122.141C150.386 121.113 151.189 120.31 152.218 120.076L154.441 119.57C154.857 119.475 155.153 119.106 155.153 118.679C155.153 118.252 154.857 117.882 154.441 117.788L152.218 117.282C151.189 117.048 150.386 116.245 150.152 115.216L149.646 112.993Z" fill="rgb(42.3134,32.8181,71.1058)" fill-rule="evenodd" />
+					<path id="Vector" d="M160.012 124.128C159.948 123.851 159.702 123.654 159.417 123.654C159.133 123.654 158.886 123.851 158.823 124.128L158.486 125.611C158.33 126.297 157.795 126.832 157.109 126.988L155.627 127.325C155.349 127.388 155.152 127.635 155.152 127.919C155.152 128.204 155.349 128.45 155.627 128.513L157.109 128.851C157.795 129.007 158.33 129.542 158.486 130.228L158.823 131.71C158.886 131.988 159.133 132.184 159.417 132.184C159.702 132.184 159.948 131.988 160.012 131.71L160.349 130.228C160.505 129.542 161.04 129.007 161.726 128.851L163.208 128.513C163.486 128.45 163.682 128.204 163.682 127.919C163.682 127.635 163.486 127.388 163.208 127.325L161.726 126.988C161.04 126.832 160.505 126.297 160.349 125.611L160.012 124.128Z" fill="url(#paint_linear_3)" fill-rule="evenodd" />
+					<path id="Vector" d="M160.012 124.128C159.948 123.851 159.702 123.654 159.417 123.654C159.133 123.654 158.886 123.851 158.823 124.128L158.486 125.611C158.33 126.297 157.795 126.832 157.109 126.988L155.627 127.325C155.349 127.388 155.152 127.635 155.152 127.919C155.152 128.204 155.349 128.45 155.627 128.513L157.109 128.851C157.795 129.007 158.33 129.542 158.486 130.228L158.823 131.71C158.886 131.988 159.133 132.184 159.417 132.184C159.702 132.184 159.948 131.988 160.012 131.71L160.349 130.228C160.505 129.542 161.04 129.007 161.726 128.851L163.208 128.513C163.486 128.45 163.682 128.204 163.682 127.919C163.682 127.635 163.486 127.388 163.208 127.325L161.726 126.988C161.04 126.832 160.505 126.297 160.349 125.611L160.012 124.128Z" fill="rgb(42.3134,32.8181,71.1058)" fill-rule="evenodd" />
+				</g>
+				<rect id="Rectangle 34624832" width="3.554217" height="17.771084" x="108.237305" y="136.449219" fill="rgb(217,217,217)" />
+				<rect id="Rectangle 34624832" width="3.554217" height="17.771084" x="108.237305" y="136.449219" fill="rgb(42.3134,32.8181,71.1058)" />
+				<rect id="Rectangle 34624833" width="3.554217" height="36.253014" x="113.923828" y="127.208984" fill="rgb(217,217,217)" />
+				<rect id="Rectangle 34624833" width="3.554217" height="36.253014" x="113.923828" y="127.208984" fill="rgb(42.3134,32.8181,71.1058)" />
+				<rect id="Rectangle 34624834" width="3.554217" height="51.891567" x="119.611328" y="119.389648" fill="rgb(217,217,217)" />
+				<rect id="Rectangle 34624834" width="3.554217" height="51.891567" x="119.611328" y="119.389648" fill="rgb(42.3134,32.8181,71.1058)" />
+				<rect id="Rectangle 34624835" width="3.554217" height="26.301205" x="126.007812" y="131.474609" fill="rgb(217,217,217)" />
+				<rect id="Rectangle 34624835" width="3.554217" height="26.301205" x="126.007812" y="131.474609" fill="rgb(42.3134,32.8181,71.1058)" />
+				<rect id="Rectangle 34624839" width="3.554217" height="26.301205" x="148.755859" y="131.474609" fill="rgb(217,217,217)" />
+				<rect id="Rectangle 34624839" width="3.554217" height="26.301205" x="148.755859" y="131.474609" fill="rgb(42.3134,32.8181,71.1058)" />
+				<rect id="Rectangle 34624836" width="3.554217" height="14.927711" x="130.984375" y="137.871094" fill="rgb(217,217,217)" />
+				<rect id="Rectangle 34624836" width="3.554217" height="14.927711" x="130.984375" y="137.871094" fill="rgb(42.3134,32.8181,71.1058)" />
+				<rect id="Rectangle 34624840" width="3.554217" height="12.084337" x="153.731445" y="139.292969" fill="rgb(217,217,217)" />
+				<rect id="Rectangle 34624840" width="3.554217" height="12.084337" x="153.731445" y="139.292969" fill="rgb(42.3134,32.8181,71.1058)" />
+				<rect id="Rectangle 34624837" width="3.554217" height="34.831326" x="137.381836" y="127.919922" fill="rgb(217,217,217)" />
+				<rect id="Rectangle 34624837" width="3.554217" height="34.831326" x="137.381836" y="127.919922" fill="rgb(42.3134,32.8181,71.1058)" />
+				<rect id="Rectangle 34624838" width="3.554217" height="32.698795" x="142.357422" y="137.871094" fill="rgb(217,217,217)" />
+				<rect id="Rectangle 34624838" width="3.554217" height="32.698795" x="142.357422" y="137.871094" fill="rgb(42.3134,32.8181,71.1058)" />
+			</g>
+		</g>
+		<path id="Star 2" d="M188.16 89.3165L197.956 89.3165L190.031 95.0744L193.058 104.391L185.133 98.633L177.208 104.391L180.235 95.0744L172.31 89.3165L182.106 89.3165L185.133 80L188.16 89.3165Z" fill="rgb(255,255,255)" fill-rule="evenodd" />
+		<path id="Star 3" d="M67.3284 186.385L77.1243 186.385L69.1993 192.143L72.2264 201.459L64.3013 195.701L56.3762 201.459L59.4033 192.143L51.4783 186.385L61.2742 186.385L64.3013 177.068L67.3284 186.385Z" fill="rgb(255,255,255)" fill-rule="evenodd" />
+		<path id="Star 5" d="M81.1609 110.757L84.3238 110.757L81.7649 112.616L82.7423 115.624L80.1835 113.765L77.6246 115.624L78.602 112.616L76.0431 110.757L79.2061 110.757L80.1835 107.749L81.1609 110.757Z" fill="rgb(255,255,255)" fill-rule="evenodd" />
+	</g>
+</svg>

@@ -1,0 +1,29 @@
+<svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36.000000" height="36.000000" fill="none" customFrame="url(#clipPath_0)">
+	<defs>
+		<linearGradient id="paint_linear_4" x1="6.5" x2="18" y1="4.99999952" y2="36" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(209,169,225)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(132,102,236)" offset="1" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_5" x1="8.21739197" x2="29.7391319" y1="2.73913026" y2="32.086956" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(0,229,255)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(21,101,192)" offset="1" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_6" x1="42.727272" x2="3.09090805" y1="69.7499924" y2="-15.1875076" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(164,214,168)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(47,125,51)" offset="1" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_7" x1="42.727272" x2="3.09090805" y1="69.7499924" y2="-15.1875076" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(0,229,255)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(21,101,192)" offset="1" stop-opacity="1" />
+		</linearGradient>
+		<clipPath id="clipPath_0">
+			<rect width="36.000000" height="36.000000" x="0.000000" y="0.000000" rx="18.000000" fill="rgb(255,255,255)" />
+		</clipPath>
+	</defs>
+	<rect id="Frame 1" width="36.000000" height="36.000000" x="0.000000" y="0.000000" rx="18.000000" fill="url(#paint_linear_4)" />
+	<rect id="Frame 1" width="36.000000" height="36.000000" x="0.000000" y="0.000000" rx="18.000000" fill="url(#paint_linear_5)" />
+	<rect id="Frame 1" width="36.000000" height="36.000000" x="0.000000" y="0.000000" rx="18.000000" fill="url(#paint_linear_6)" />
+	<rect id="Frame 1" width="36.000000" height="36.000000" x="0.000000" y="0.000000" rx="18.000000" fill="url(#paint_linear_7)" />
+	<rect id="Frame 1" width="35.000000" height="35.000000" x="0.500000" y="0.500000" rx="17.500000" stroke="rgb(255,255,255)" stroke-opacity="0.200000003" stroke-width="1" />
+	<path id="Line 24" d="M11 17.4545L23.2727 17.4545L23.2727 18.5455L11 18.5455L11 17.4545ZM22.5013 18L19.8015 15.3001C19.5855 15.0841 19.5855 14.7447 19.8015 14.5287C20.0175 14.3128 20.3569 14.3128 20.5729 14.5287L23.6584 17.6143C23.8744 17.8303 23.8744 18.1697 23.6584 18.3857L20.5729 21.4713C20.3569 21.6872 20.0175 21.6872 19.8015 21.4713C19.5855 21.2553 19.5855 20.9159 19.8015 20.6999L22.5013 18Z" fill="rgb(255,255,255)" fill-rule="nonzero" />
+</svg>

@@ -1,0 +1,76 @@
+<svg viewBox="0 0 65 65" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65.000000" height="65.000000" fill="none" customFrame="#000000">
+	<defs>
+		<linearGradient id="paint_linear_0" x1="27.6755867" x2="38.2791557" y1="46.7771912" y2="60.2285652" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(0,229,255)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(21,101,192)" offset="1" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_1" x1="26.5483532" x2="39.6397934" y1="24.3533325" y2="40.0513611" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(0,229,255)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(21,101,192)" offset="1" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_2" x1="27.6755867" x2="38.2791557" y1="4.23343801" y2="17.686882" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(0,229,255)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(21,101,192)" offset="1" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_3" x1="11.2175179" x2="25.5320911" y1="1.38972819" y2="16.2796726" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(0,229,255)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(21,101,192)" offset="1" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_4" x1="4.2368784" x2="15.3334646" y1="19.7975883" y2="44.2288895" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(0,229,255)" offset="0" stop-opacity="1" />
+			<stop stop-color="rgb(21,101,192)" offset="1" stop-opacity="1" />
+		</linearGradient>
+	</defs>
+	<g id="Group 1577708395">
+		<g id="Group">
+			<g id="Group">
+				<path id="Vector" d="M61.36 17.5134L61.1488 17.6069C56.4119 19.7153 51.4922 21.2469 46.4466 22.2544C47.8725 29.0184 47.8685 36.0059 46.4385 42.7659C51.4841 43.7694 56.4282 45.2887 61.1447 47.3891L61.3519 47.4825C63.6716 42.9934 65 37.9072 65 32.5C65 27.0928 63.6716 22.0066 61.36 17.5134Z" fill="rgb(28,94,32)" fill-rule="nonzero" />
+			</g>
+		</g>
+		<g id="Group">
+			<g id="Group">
+				<path id="Vector" d="M23.627 46.1052C25.4226 51.8211 28.3841 57.2365 32.4954 62.0221C36.6066 57.2365 39.5723 51.8211 41.3638 46.1052C35.4773 45.3252 29.5135 45.3293 23.627 46.1052Z" fill="url(#paint_linear_0)" fill-rule="nonzero" />
+				<path id="Vector" d="M23.627 46.1052C25.4226 51.8211 28.3841 57.2365 32.4954 62.0221C36.6066 57.2365 39.5723 51.8211 41.3638 46.1052C35.4773 45.3252 29.5135 45.3293 23.627 46.1052Z" fill="rgb(28,94,32)" fill-rule="nonzero" />
+			</g>
+		</g>
+		<g id="Group">
+			<g id="Group">
+				<path id="Vector" d="M42.4209 22.8882C39.1547 23.3472 35.8559 23.6601 32.5003 23.6601C29.1406 23.6601 25.8418 23.3432 22.5756 22.8882C21.2065 29.2338 21.2065 35.7988 22.5837 42.1444C29.1609 41.2304 35.8356 41.2304 42.4128 42.1444C43.79 35.7988 43.794 29.2338 42.4209 22.8882Z" fill="url(#paint_linear_1)" fill-rule="nonzero" />
+				<path id="Vector" d="M42.4209 22.8882C39.1547 23.3472 35.8559 23.6601 32.5003 23.6601C29.1406 23.6601 25.8418 23.3432 22.5756 22.8882C21.2065 29.2338 21.2065 35.7988 22.5837 42.1444C29.1609 41.2304 35.8356 41.2304 42.4128 42.1444C43.79 35.7988 43.794 29.2338 42.4209 22.8882Z" fill="rgb(28,94,32)" fill-rule="nonzero" />
+			</g>
+		</g>
+		<g id="Group">
+			<g id="Group">
+				<path id="Vector" d="M32.4954 2.97778C28.3841 7.76341 25.4226 13.1787 23.627 18.8987C29.5135 19.6747 35.4813 19.6747 41.3638 18.8987C39.5682 13.1828 36.6066 7.76341 32.4954 2.97778Z" fill="url(#paint_linear_2)" fill-rule="nonzero" />
+				<path id="Vector" d="M32.4954 2.97778C28.3841 7.76341 25.4226 13.1787 23.627 18.8987C29.5135 19.6747 35.4813 19.6747 41.3638 18.8987C39.5682 13.1828 36.6066 7.76341 32.4954 2.97778Z" fill="rgb(28,94,32)" fill-rule="nonzero" />
+			</g>
+		</g>
+		<g id="Group">
+			<g id="Group">
+				<path id="Vector" d="M35.2988 0C40.0682 5.46 43.4645 11.6878 45.4388 18.265C50.1757 17.3387 54.8151 15.9291 59.2432 13.975C53.8807 6.17906 45.2276 0.853125 35.2988 0Z" fill="rgb(28,94,32)" fill-rule="nonzero" />
+			</g>
+		</g>
+		<g id="Group">
+			<g id="Group">
+				<path id="Vector" d="M5.75195 13.975C10.1841 15.925 14.8235 17.3387 19.5563 18.265C21.5307 11.6878 24.927 5.46 29.6963 0C19.7676 0.853125 11.1185 6.17906 5.75195 13.975Z" fill="url(#paint_linear_3)" fill-rule="nonzero" />
+				<path id="Vector" d="M5.75195 13.975C10.1841 15.925 14.8235 17.3387 19.5563 18.265C21.5307 11.6878 24.927 5.46 29.6963 0C19.7676 0.853125 11.1185 6.17906 5.75195 13.975Z" fill="rgb(28,94,32)" fill-rule="nonzero" />
+			</g>
+		</g>
+		<g id="Group">
+			<g id="Group">
+				<path id="Vector" d="M18.5534 22.2583C13.5078 21.2467 8.59219 19.7192 3.85938 17.6108L3.64812 17.5173C1.32844 22.0064 0 27.0926 0 32.4998C0 37.907 1.32844 42.9933 3.64812 47.4864L3.85938 47.393C8.57187 45.2886 13.5159 43.7692 18.5616 42.7698C17.1275 36.0098 17.1275 29.0223 18.5534 22.2583Z" fill="url(#paint_linear_4)" fill-rule="nonzero" />
+				<path id="Vector" d="M18.5534 22.2583C13.5078 21.2467 8.59219 19.7192 3.85938 17.6108L3.64812 17.5173C1.32844 22.0064 0 27.0926 0 32.4998C0 37.907 1.32844 42.9933 3.64812 47.4864L3.85938 47.393C8.57187 45.2886 13.5159 43.7692 18.5616 42.7698C17.1275 36.0098 17.1275 29.0223 18.5534 22.2583Z" fill="rgb(28,94,32)" fill-rule="nonzero" />
+			</g>
+		</g>
+		<g id="Group">
+			<g id="Group">
+				<path id="Vector" d="M19.5563 46.739C14.8195 47.6612 10.1801 49.075 5.75195 51.025C11.1185 58.8209 19.7676 64.1468 29.6963 65C24.927 59.54 21.5307 53.3121 19.5563 46.739Z" fill="rgb(28,94,32)" fill-rule="nonzero" />
+			</g>
+		</g>
+		<g id="Group">
+			<g id="Group">
+				<path id="Vector" d="M45.4388 46.7346C43.4685 53.3118 40.0682 59.5396 35.2988 64.9996C45.2276 64.1465 53.8807 58.8206 59.2432 51.0246C54.8151 49.0706 50.1757 47.6609 45.4388 46.7346Z" fill="rgb(28,94,32)" fill-rule="nonzero" />
+			</g>
+		</g>
+	</g>
+</svg>

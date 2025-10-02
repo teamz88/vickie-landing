@@ -1,0 +1,173 @@
+@import "tailwindcss";
+@plugin './hero.ts';
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+@font-face {
+  font-family: "Hellix";
+  src: url("/fonts/Hellix-Regular.eot");
+  src:
+    local("Hellix Regular"),
+    local("Hellix-Regular"),
+    url("/fonts/Hellix-Regular.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/Hellix-Regular.woff2") format("woff2"),
+    url("/fonts/Hellix-Regular.woff") format("woff"),
+    url("/fonts/Hellix-Regular.ttf") format("truetype");
+  font-weight: normal; /* 400 */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Hellix";
+  src: url("/fonts/Hellix-Medium.eot");
+  src:
+    local("Hellix Medium"),
+    local("Hellix-Medium"),
+    url("/fonts/Hellix-Medium.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/Hellix-Medium.woff2") format("woff2"),
+    url("/fonts/Hellix-Medium.woff") format("woff"),
+    url("/fonts/Hellix-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Hellix";
+  src: url("/fonts/Hellix-SemiBold.eot");
+  src:
+    local("Hellix SemiBold"),
+    local("Hellix-SemiBold"),
+    url("/fonts/Hellix-SemiBold.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/Hellix-SemiBold.woff2") format("woff2"),
+    url("/fonts/Hellix-SemiBold.woff") format("woff"),
+    url("/fonts/Hellix-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Hellix";
+  src: url("/fonts/Hellix-Bold.eot");
+  src:
+    local("Hellix Bold"),
+    local("Hellix-Bold"),
+    url("/fonts//fonts/Hellix-Bold.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/Hellix-Bold.woff2") format("woff2"),
+    url("/fonts/Hellix-Bold.woff") format("woff"),
+    url("/fonts/Hellix-Bold.ttf") format("truetype");
+  font-weight: bold; /* 700 */
+  font-style: normal;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Hellix", Arial, Helvetica, sans-serif;
+  --font-mono: "Hellix", monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+.book-demo {
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  box-shadow: 0px 21px 46.099998474121094px 0px rgba(47, 125, 51, 0.34);
+  background:
+    linear-gradient(
+      -24.99deg,
+      rgba(164, 214, 168, 1),
+      rgba(47, 125, 51, 1) 100%
+    ),
+    linear-gradient(
+      -24.99deg,
+      rgba(164, 214, 168, 1),
+      rgba(47, 125, 51, 1) 100%
+    );
+}
+
+.book-demo:hover {
+  box-shadow: 0px 21px 46.099998474121094px 0px rgba(21, 101, 192, 0.34);
+  background:
+    linear-gradient(-24.99deg, rgba(0, 229, 255, 1), rgba(21, 101, 192, 1) 100%),
+    linear-gradient(-24.99deg, rgba(0, 229, 255, 1), rgba(21, 101, 192, 1) 100%);
+}
+
+.call-back {
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  box-shadow: 0px 21px 46.099998474121094px 0px rgba(199, 141, 238, 0.35);
+  background: rgba(255, 255, 255, 1);
+}
+
+.rg-box {
+  background: radial-gradient(
+    ellipse 77.47% 76.69% at 29% 45%,
+    rgba(28, 94, 32, 0) 37%,
+    rgba(28, 94, 32, 1) 100%
+  );
+  opacity: 0.9;
+  width: 952px;
+  height: 952px; /* Added for visibility in demo */
+}
+
+.video-box {
+  background: linear-gradient(
+    0deg,
+    rgba(28, 94, 32, 0),
+    rgba(28, 94, 32, 1) 100%
+  );
+}
+
+.footer-pattern {
+  width: 450px;
+  height: 450px;
+  border-radius: 100%;
+  filter: blur(367.70001220703125px);
+  background: rgba(28, 94, 32, 0.4);
+}
+
+.shadow-box {
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(242, 239, 255, 0), rgba(242, 239, 255, 1) 100%),
+    linear-gradient(
+      180deg,
+      rgba(242, 239, 255, 0),
+      rgba(237.83653259277344, 245.86622619628906, 255, 1) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(238, 255, 239, 0),
+      rgba(237.83653259277344, 255, 238.87673950195312, 1) 100%
+    );
+}
+
+.what-box {
+  border-radius: 40px 40px 0px 0px;
+  background: linear-gradient(
+    180deg,
+    rgba(236.61058044433594, 255, 237.67971801757812, 1),
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.rounded-box {
+  filter: blur(400px);
+  background: rgba(28, 94, 32, 1);
+}
+
+.voice-bg {
+  background: linear-gradient(-24.99deg, rgba(164, 214, 168, 1),rgba(47, 125, 51, 1) 100%);
+}

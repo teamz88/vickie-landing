@@ -1,0 +1,31 @@
+[00:00:01] AI: Hey, you've reached Podium Heating and Air.
+[00:00:03] AI: My name is Jessica.
+[00:00:04] AI: How can I help you?
+[00:00:07] CUSTOMER: Hey, Jessica, my AC is out and I need somebody to come by ASAP to fix it.
+[00:00:13] AI: Sorry to hear that your AC is out.
+[00:00:16] AI: Can I get your name?
+[00:00:18] CUSTOMER: Yes, Eric.
+[00:00:21] AI: Thanks, Eric.
+[00:00:22] AI: Is this the best number to reach you at?
+[00:00:25] CUSTOMER: It is.
+[00:00:27] AI: Can I get the property address you're calling about?
+[00:00:32] CUSTOMER: Yeah, 1600 Digital Drive, Lehigh, Utah.
+[00:00:38] AI: The earliest available appointment time is Friday, April 4th at 7 o'clock a.m.
+[00:00:43] AI: What date and time would you like to schedule your appointment for?
+[00:00:48] CUSTOMER: 7 a.m. is a little early.
+[00:00:49] CUSTOMER: Can we do 9 a.m. on Friday?
+[00:00:53] AI: That's not one of our available times.
+[00:00:54] AI: I have 10 o'clock a.m. available on Friday.
+[00:00:57] AI: Would you like to schedule for then?
+[00:01:00] CUSTOMER: Yeah, that works.
+[00:01:03] AI: I've got that all noted down and will pass this information on to our team.
+[00:01:07] AI: A representative will reach out to confirm.
+[00:01:09] AI: Is there anything else I can help you with?
+[00:01:12] CUSTOMER: Yeah, is there a charge or a cost of the service call?
+[00:01:22] AI: Give me one moment.
+[00:01:28] AI: The cost of a service call is $95, applied to service if proceeding.
+[00:01:33] AI: Is there anything else I can help you with?
+[00:01:35] CUSTOMER: No, that's great.
+[00:01:36] CUSTOMER: Thanks a lot.
+[00:01:39] AI: Thank you for calling Podium Heating and Air.
+[00:01:41] AI: Have a great day.
