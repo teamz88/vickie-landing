@@ -20,9 +20,9 @@ const Impact = dynamic(() => import("./section/impact"), {
 const What = dynamic(() => import("./section/what"), {
   loading: () => <div className="min-h-[300px] animate-pulse bg-gray-100 rounded-lg" />,
 });
-const Schedule = dynamic(() => import("./section/schedule"), {
-  loading: () => <div className="min-h-[200px] animate-pulse bg-gray-100 rounded-lg" />,
-});
+// const Schedule = dynamic(() => import("./section/schedule"), {
+//   loading: () => <div className="min-h-[200px] animate-pulse bg-gray-100 rounded-lg" />,
+// });
 const Missed = dynamic(() => import("./section/missed"), {
   loading: () => <div className="min-h-[400px] animate-pulse bg-gray-100 rounded-lg" />,
 });
@@ -35,11 +35,11 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center">
       <Hero />
       <Missed />
-      <Schedule />
+      {/* <Schedule /> */}
+      <ROICalculator />
       <What />
       <Impact />
       <Call />
-      <ROICalculator />
       <Video />
       <FAQ />
       <TouchForm />

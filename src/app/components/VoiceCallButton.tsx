@@ -63,7 +63,7 @@ export default function VoiceCallButton({
     if (status === "idle") {
       setStatus("connecting");
       if (vapi) {
-        vapi.start(assistantId);
+        vapi.start(assistantId, {}, 'c3b9fdb0-5d8a-431d-b324-9b5d5c4821e7');
       }
     } else if (status !== "connecting") {
       if (vapi) {
