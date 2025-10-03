@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Navbar from "./section/navbar";
 import "./globals.css";
 import Footer from "./section/footer";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Vickie Voice AI Agent - Stop Missed Calls, Book More Jobs | 24/7 AI Phone Assistant",
@@ -72,14 +73,8 @@ export default function RootLayout({
         <link
           href="https://assets.calendly.com/assets/external/widget.css"
           rel="stylesheet"
-          media="print"
         />
-        <script
-          src="https://assets.calendly.com/assets/external/widget.js"
-          type="text/javascript"
-          async
-          defer
-        ></script>
+        <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" />
       </head>
       <body className="antialiased">
         <Navbar />
