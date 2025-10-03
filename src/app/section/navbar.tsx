@@ -54,8 +54,8 @@ export default function Navbar() {
 
         {/* Desktop CTA Buttons */}
         <div className="hidden xl:flex items-center justify-center gap-4.5">
-          <a href="tel:+16176801682" className="bg-white text-lg xl:text-xl px-3 xl:px-4 py-3 xl:py-3.5 rounded-full border border-gray-500 font-semibold hover:bg-gray-50 transition-colors">
-            Sales Rep: +1 617 680 1682
+          <a href="tel:+16177625230" className="bg-white text-lg xl:text-xl px-3 xl:px-4 py-3 xl:py-3.5 rounded-full border border-gray-500 font-semibold hover:bg-gray-50 transition-colors">
+            Sales Rep: +1 617 762 5230
           </a>
           <BookDemo />
         </div>
@@ -151,11 +151,11 @@ export default function Navbar() {
           {/* Mobile CTA Buttons */}
           <div className="px-6 py-8 border-t space-y-4">
             <a 
-              href="tel:+16176801682" 
+              href="tel:+16177625230" 
               className="block w-full bg-white text-center text-lg px-4 py-3 rounded-full border border-gray-500 font-semibold hover:bg-gray-50 transition-colors"
               onClick={toggleMenu}
             >
-              Sales Rep: +1 617 680 1682
+              Sales Rep: +1 617 762 5230
             </a>
             <button
               type="button"

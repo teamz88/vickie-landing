@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Transcript Audio Player</title>
     <style>
@@ -10,8 +13,66 @@
             box-sizing: border-box;
         }
 
+        @font-face {
+            font-family: "Hellix";
+            src: url("/fonts/Hellix-Regular.eot");
+            src:
+                local("Hellix Regular"),
+                local("Hellix-Regular"),
+                url("/fonts/Hellix-Regular.eot?#iefix") format("embedded-opentype"),
+                url("/fonts/Hellix-Regular.woff2") format("woff2"),
+                url("/fonts/Hellix-Regular.woff") format("woff"),
+                url("/fonts/Hellix-Regular.ttf") format("truetype");
+            font-weight: normal;
+            /* 400 */
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Hellix";
+            src: url("/fonts/Hellix-Medium.eot");
+            src:
+                local("Hellix Medium"),
+                local("Hellix-Medium"),
+                url("/fonts/Hellix-Medium.eot?#iefix") format("embedded-opentype"),
+                url("/fonts/Hellix-Medium.woff2") format("woff2"),
+                url("/fonts/Hellix-Medium.woff") format("woff"),
+                url("/fonts/Hellix-Medium.ttf") format("truetype");
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Hellix";
+            src: url("/fonts/Hellix-SemiBold.eot");
+            src:
+                local("Hellix SemiBold"),
+                local("Hellix-SemiBold"),
+                url("/fonts/Hellix-SemiBold.eot?#iefix") format("embedded-opentype"),
+                url("/fonts/Hellix-SemiBold.woff2") format("woff2"),
+                url("/fonts/Hellix-SemiBold.woff") format("woff"),
+                url("/fonts/Hellix-SemiBold.ttf") format("truetype");
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Hellix";
+            src: url("/fonts/Hellix-Bold.eot");
+            src:
+                local("Hellix Bold"),
+                local("Hellix-Bold"),
+                url("/fonts//fonts/Hellix-Bold.eot?#iefix") format("embedded-opentype"),
+                url("/fonts/Hellix-Bold.woff2") format("woff2"),
+                url("/fonts/Hellix-Bold.woff") format("woff"),
+                url("/fonts/Hellix-Bold.ttf") format("truetype");
+            font-weight: bold;
+            /* 700 */
+            font-style: normal;
+        }
+
         body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Hellix', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -76,14 +137,23 @@
         }
 
         @keyframes islandPulse {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
         }
 
         .player-container {
             width: 100%;
             height: 100%;
-            background: transparent;
+            background: white;
             padding: 60px 10px 10px;
             display: flex;
             flex-direction: column;
@@ -96,11 +166,10 @@
         .player-controls {
             display: flex;
             flex-direction: column;
-            background: rgba(255, 255, 255, 0.8);
+            background: #EDFFEE;
             border-radius: 20px;
             padding: 20px;
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 0, 0, 0.08);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
@@ -135,12 +204,6 @@
                 transform: scale(1.02);
             }
         }
-
-        .player-container:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3);
-        }
-
 
 
         .waveform-container {
@@ -268,6 +331,17 @@
             transition: all 0.1s ease;
         }
 
+        .playBg {
+            background: linear-gradient(-90deg, #A4D6A8 0%, #2F7D33 100%);
+            backdrop-filter: blur(20px);
+        }
+
+        .playBg:hover {
+            background: linear-gradient(-90deg, #A4D6A8 0%, #2F7D33 100%);
+            box-shadow: 0 12px 40px #2f7d3371, 0 0 0 1px rgba(255, 255, 255, 0.2);
+            transform: scale(1.08) translateY(-3px);
+        }
+
         .play-btn {
             width: 80px;
             height: 80px;
@@ -349,10 +423,10 @@
             line-height: 1.8;
             font-size: 15px;
             color: #1c1c1e;
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            /* border: 1px solid rgba(0, 0, 0, 0.08); */
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04); */
         }
 
         .chat-message {
@@ -426,7 +500,6 @@
         .message-bubble {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 20px;
             padding: 14px 18px;
             color: #1c1c1e;
@@ -437,6 +510,10 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
             font-weight: 400;
+        }
+
+        .ai .message-bubble {
+            background: #EDFFEE;
         }
 
         .message-time {
@@ -460,9 +537,12 @@
         }
 
         @keyframes activePulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 24px rgba(52, 152, 219, 0.2), 0 4px 20px rgba(0, 0, 0, 0.08);
             }
+
             50% {
                 box-shadow: 0 0 32px rgba(52, 152, 219, 0.3), 0 6px 24px rgba(0, 0, 0, 0.12);
             }
@@ -538,7 +618,6 @@
                 opacity: 0.3;
             }
         }
-
     </style>
 </head>
 
@@ -552,300 +631,341 @@
                         <span class="mood-text">🎵 Ready to play</span>
                     </div>
                     <div class="transcript-text" id="transcriptText">
-                            <div class="chat-message ai" data-message-index="0">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Hi, thanks for calling HVAC iFlow. This is Vickie, your AI assistant. How can I help you today?
-                                    </div>
-                                    <div class="message-time">0:00</div>
+                        <div class="chat-message ai" data-message-index="0">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Hi, thanks for calling HVAC iFlow. This is Vickie, your AI assistant. How can I help
+                                    you today?
                                 </div>
-                            </div>
-                        
-                            <div class="chat-message customer" data-message-index="1">
-                                <div class="message-avatar">👤</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Hi, Vickie. My air conditioner is not working anymore.
-                                    </div>
-                                    <div class="message-time">0:04</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="2">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        I'm sorry to hear your air conditioner stopped working, especially with how hot it's been lately.
-                                    </div>
-                                    <div class="message-time">0:11</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="3">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Can you tell me your zip code or what city you're in so I can check availability in your area?
-                                    </div>
-                                    <div class="message-time">0:15</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message customer" data-message-index="4">
-                                <div class="message-avatar">👤</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        I'm in Boston, Massachusetts.
-                                    </div>
-                                    <div class="message-time">0:20</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="5">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Thanks for letting me know you're in Boston.
-                                    </div>
-                                    <div class="message-time">0:23</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="6">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Is your AC completely not turning on or is it just not cooling properly and is this something
-                                    </div>
-                                    <div class="message-time">0:25</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="7">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        that needs urgent attention or can it wait a day or so?
-                                    </div>
-                                    <div class="message-time">0:29</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message customer" data-message-index="8">
-                                <div class="message-avatar">👤</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        It's not cooling properly.
-                                    </div>
-                                    <div class="message-time">0:32</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="9">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Got it.
-                                    </div>
-                                    <div class="message-time">0:34</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="10">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        So the AC is running but not cooling as it should.
-                                    </div>
-                                    <div class="message-time">0:36</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="11">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Would you say this needs immediate attention or is it more of a comfort issue that can
-                                    </div>
-                                    <div class="message-time">0:39</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="12">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        wait a day?
-                                    </div>
-                                    <div class="message-time">0:42</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message customer" data-message-index="13">
-                                <div class="message-avatar">👤</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        I think it can wait a day.
-                                    </div>
-                                    <div class="message-time">0:43</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="14">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Thanks for clarifying. To make sure our technician comes prepared and you're not stuck waiting for a
-                                    </div>
-                                    <div class="message-time">0:47</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="15">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        second visit, I'd like to send a quick form to your phone. It saves you time since you won't
-                                    </div>
-                                    <div class="message-time">0:52</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="16">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        have to repeat your info and it helps us match you with the right tech for your system.
-                                    </div>
-                                    <div class="message-time">0:56</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="17">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Would you like me to send that form now?
-                                    </div>
-                                    <div class="message-time">1:00</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message customer" data-message-index="18">
-                                <div class="message-avatar">👤</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Yes, please
-                                    </div>
-                                    <div class="message-time">1:03</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="19">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Hold on a sec...
-                                    </div>
-                                    <div class="message-time">1:06</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="20">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        I've sent that form to your phone. You should get it in the next minute or so. Once you fill it out, our team
-                                    </div>
-                                    <div class="message-time">1:09</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="21">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        will reach out within two hours to get your AC issue sorted. Is there anything else about your
-                                    </div>
-                                    <div class="message-time">1:13</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="22">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        heating or cooling I can help with right now?
-                                    </div>
-                                    <div class="message-time">1:17</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message customer" data-message-index="23">
-                                <div class="message-avatar">👤</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        No, thanks so much.
-                                    </div>
-                                    <div class="message-time">1:20</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="24">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        You're very welcome.
-                                    </div>
-                                    <div class="message-time">1:23</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="25">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Once you submit that form, we'll handle the rest and get your AC back to normal.
-                                    </div>
-                                    <div class="message-time">1:25</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="26">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Thanks for choosing HVAC iFlow.
-                                    </div>
-                                    <div class="message-time">1:30</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message ai" data-message-index="27">
-                                <div class="message-avatar">🤖</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Have a great day and stay cool.
-                                    </div>
-                                    <div class="message-time">1:31</div>
-                                </div>
-                            </div>
-                        
-                            <div class="chat-message customer" data-message-index="28">
-                                <div class="message-avatar">👤</div>
-                                <div class="message-content">
-                                    <div class="message-bubble">
-                                        Thanks you.
-                                    </div>
-                                    <div class="message-time">1:33</div>
-                                </div>
+                                <div class="message-time">0:00</div>
                             </div>
                         </div>
+
+                        <div class="chat-message customer" data-message-index="1">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Hi, Vickie. My air conditioner is not working anymore.
+                                </div>
+                                <div class="message-time">0:04</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="2">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    I'm sorry to hear your air conditioner stopped working, especially with how hot it's
+                                    been lately.
+                                </div>
+                                <div class="message-time">0:11</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="3">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Can you tell me your zip code or what city you're in so I can check availability in
+                                    your area?
+                                </div>
+                                <div class="message-time">0:15</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message customer" data-message-index="4">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    I'm in Boston, Massachusetts.
+                                </div>
+                                <div class="message-time">0:20</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="5">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Thanks for letting me know you're in Boston.
+                                </div>
+                                <div class="message-time">0:23</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="6">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Is your AC completely not turning on or is it just not cooling properly and is this
+                                    something
+                                </div>
+                                <div class="message-time">0:25</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="7">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    that needs urgent attention or can it wait a day or so?
+                                </div>
+                                <div class="message-time">0:29</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message customer" data-message-index="8">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    It's not cooling properly.
+                                </div>
+                                <div class="message-time">0:32</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="9">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Got it.
+                                </div>
+                                <div class="message-time">0:34</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="10">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    So the AC is running but not cooling as it should.
+                                </div>
+                                <div class="message-time">0:36</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="11">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Would you say this needs immediate attention or is it more of a comfort issue that
+                                    can
+                                </div>
+                                <div class="message-time">0:39</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="12">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    wait a day?
+                                </div>
+                                <div class="message-time">0:42</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message customer" data-message-index="13">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    I think it can wait a day.
+                                </div>
+                                <div class="message-time">0:43</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="14">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Thanks for clarifying. To make sure our technician comes prepared and you're not
+                                    stuck waiting for a
+                                </div>
+                                <div class="message-time">0:47</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="15">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    second visit, I'd like to send a quick form to your phone. It saves you time since
+                                    you won't
+                                </div>
+                                <div class="message-time">0:52</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="16">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    have to repeat your info and it helps us match you with the right tech for your
+                                    system.
+                                </div>
+                                <div class="message-time">0:56</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="17">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Would you like me to send that form now?
+                                </div>
+                                <div class="message-time">1:00</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message customer" data-message-index="18">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Yes, please
+                                </div>
+                                <div class="message-time">1:03</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="19">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Hold on a sec...
+                                </div>
+                                <div class="message-time">1:06</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="20">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    I've sent that form to your phone. You should get it in the next minute or so. Once
+                                    you fill it out, our team
+                                </div>
+                                <div class="message-time">1:09</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="21">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    will reach out within two hours to get your AC issue sorted. Is there anything else
+                                    about your
+                                </div>
+                                <div class="message-time">1:13</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="22">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    heating or cooling I can help with right now?
+                                </div>
+                                <div class="message-time">1:17</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message customer" data-message-index="23">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    No, thanks so much.
+                                </div>
+                                <div class="message-time">1:20</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="24">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    You're very welcome.
+                                </div>
+                                <div class="message-time">1:23</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="25">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Once you submit that form, we'll handle the rest and get your AC back to normal.
+                                </div>
+                                <div class="message-time">1:25</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="26">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Thanks for choosing HVAC iFlow.
+                                </div>
+                                <div class="message-time">1:30</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message ai" data-message-index="27">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Have a great day and stay cool.
+                                </div>
+                                <div class="message-time">1:31</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-message customer" data-message-index="28">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Thanks you.
+                                </div>
+                                <div class="message-time">1:33</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="player-controls">
-                    <div class="waveform-container" id="waveform"><div class="waveform-bar" style="height: 16.2207px;"></div><div class="waveform-bar" style="height: 37.2919px;"></div><div class="waveform-bar" style="height: 37.2478px;"></div><div class="waveform-bar" style="height: 23.9991px;"></div><div class="waveform-bar" style="height: 44.8164px;"></div><div class="waveform-bar" style="height: 31.0854px;"></div><div class="waveform-bar" style="height: 17.9963px;"></div><div class="waveform-bar" style="height: 34.2537px;"></div><div class="waveform-bar" style="height: 30.7682px;"></div><div class="waveform-bar" style="height: 18.5571px;"></div><div class="waveform-bar" style="height: 28.255px;"></div><div class="waveform-bar" style="height: 40.7612px;"></div><div class="waveform-bar" style="height: 44.6741px;"></div><div class="waveform-bar" style="height: 42.1644px;"></div><div class="waveform-bar" style="height: 22.7952px;"></div><div class="waveform-bar" style="height: 17.3692px;"></div><div class="waveform-bar" style="height: 31.543px;"></div><div class="waveform-bar" style="height: 25.0211px;"></div><div class="waveform-bar" style="height: 28.0693px;"></div><div class="waveform-bar" style="height: 31.2813px;"></div><div class="waveform-bar" style="height: 39.842px;"></div><div class="waveform-bar" style="height: 40.1475px;"></div><div class="waveform-bar" style="height: 38.5927px;"></div><div class="waveform-bar" style="height: 30.3682px;"></div><div class="waveform-bar" style="height: 29.6093px;"></div><div class="waveform-bar" style="height: 33.8269px;"></div><div class="waveform-bar" style="height: 31.5911px;"></div><div class="waveform-bar" style="height: 29.8593px;"></div><div class="waveform-bar" style="height: 43.5733px;"></div><div class="waveform-bar" style="height: 23.3084px;"></div></div>
+                    <div class="waveform-container" id="waveform">
+                        <div class="waveform-bar" style="height: 16.2207px;"></div>
+                        <div class="waveform-bar" style="height: 37.2919px;"></div>
+                        <div class="waveform-bar" style="height: 37.2478px;"></div>
+                        <div class="waveform-bar" style="height: 23.9991px;"></div>
+                        <div class="waveform-bar" style="height: 44.8164px;"></div>
+                        <div class="waveform-bar" style="height: 31.0854px;"></div>
+                        <div class="waveform-bar" style="height: 17.9963px;"></div>
+                        <div class="waveform-bar" style="height: 34.2537px;"></div>
+                        <div class="waveform-bar" style="height: 30.7682px;"></div>
+                        <div class="waveform-bar" style="height: 18.5571px;"></div>
+                        <div class="waveform-bar" style="height: 28.255px;"></div>
+                        <div class="waveform-bar" style="height: 40.7612px;"></div>
+                        <div class="waveform-bar" style="height: 44.6741px;"></div>
+                        <div class="waveform-bar" style="height: 42.1644px;"></div>
+                        <div class="waveform-bar" style="height: 22.7952px;"></div>
+                        <div class="waveform-bar" style="height: 17.3692px;"></div>
+                        <div class="waveform-bar" style="height: 31.543px;"></div>
+                        <div class="waveform-bar" style="height: 25.0211px;"></div>
+                        <div class="waveform-bar" style="height: 28.0693px;"></div>
+                        <div class="waveform-bar" style="height: 31.2813px;"></div>
+                        <div class="waveform-bar" style="height: 39.842px;"></div>
+                        <div class="waveform-bar" style="height: 40.1475px;"></div>
+                        <div class="waveform-bar" style="height: 38.5927px;"></div>
+                        <div class="waveform-bar" style="height: 30.3682px;"></div>
+                        <div class="waveform-bar" style="height: 29.6093px;"></div>
+                        <div class="waveform-bar" style="height: 33.8269px;"></div>
+                        <div class="waveform-bar" style="height: 31.5911px;"></div>
+                        <div class="waveform-bar" style="height: 29.8593px;"></div>
+                        <div class="waveform-bar" style="height: 43.5733px;"></div>
+                        <div class="waveform-bar" style="height: 23.3084px;"></div>
+                    </div>
 
                     <div class="progress-container">
                         <div class="progress-bar" id="progressBar">
@@ -859,8 +979,8 @@
 
                     <div class="controls">
                         <button class="control-btn" id="muteBtn">🔊</button>
-                        <button class="play-btn" id="playBtn">📞</button>
-                        <button class="control-btn" id="pauseBtn">⏸</button>
+                        <!-- <button class="play-btn" id="playBtn">📞</button> -->
+                        <button class="control-btn playBg" id="pauseBtn" style="color: #ffffff;">▶</button>
                     </div>
                 </div>
             </div>
@@ -906,7 +1026,7 @@
                 // Check for available audio files in voice/ folder
                 const audioExtensions = ['.wav'];
                 const possibleFiles = ['hvac'];
-                
+
                 this.audioFiles = [];
 
                 for (const fileName of possibleFiles) {
@@ -1007,15 +1127,15 @@
 
             setupEventListeners() {
                 // Event listeners
-                this.playBtn.addEventListener('click', () => {
-                    if (this.isPlaying) {
-                        // If playing (red state), reset to default
-                        this.resetToDefault();
-                    } else {
-                        // If not playing (blue state), start playing
-                        this.togglePlay();
-                    }
-                });
+                //this.playBtn.addEventListener('click', () => {
+                // if (this.isPlaying) {
+                //     // If playing (red state), reset to default
+                //     this.resetToDefault();
+                // } else {
+                //     // If not playing (blue state), start playing
+                //     this.togglePlay();
+                // }
+                // });
                 this.pauseBtn.addEventListener('click', () => this.togglePlay());
                 this.muteBtn.addEventListener('click', () => this.toggleMute());
                 // Play/Pause button
@@ -1286,4 +1406,6 @@
     </script>
 
 
-</body></html>
+</body>
+
+</html>
