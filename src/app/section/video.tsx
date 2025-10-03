@@ -12,7 +12,7 @@ export default function Video() {
       <div className="video-box rounded-[20px] xl:rounded-[40px] w-full max-w-[420px] sm:max-w-[600px] md:max-w-[800px] xl:max-w-[1200px] h-[240px] sm:h-[340px] md:h-[450px] xl:h-[707px] mx-auto p-3 sm:p-4 xl:p-6 relative z-10">
         <div className="rounded-[10px] xl:rounded-[20px] overflow-hidden w-full h-full">
           <iframe
-            src="https://www.youtube.com/embed/dPHx6eRzqAM"
+            src="https://www.youtube.com/embed/QVWbW4hhd0E"
             title="Vickie Video"
             className="w-full h-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
