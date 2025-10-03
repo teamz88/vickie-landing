@@ -10,8 +10,8 @@ export default function FAQ() {
   const faqData = [
     {
       key: "1",
-      title: "What services do you offer?",
-      content: "We offer a comprehensive range of digital services including web development, mobile app development, UI/UX design, and digital marketing solutions to help your business grow online."
+      title: "We offer AI receptionist",
+      content: "We offer Vickie, a 24/7 multilingual voice AI receptionist for service businesses. Vickie answers and routes inbound calls, books jobs, updates your CRM, and also makes outbound follow-up calls so no lead or quote ever slips through."
     },
     {
       key: "2", 
