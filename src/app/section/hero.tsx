@@ -85,17 +85,17 @@ export default function Hero() {
         <div className="flex flex-col lg:items-start xl:items-start items-center space-y-4">
           <button
             type="button"
-            className="flex gap-3 items-center justify-center cursor-pointer group transition-all duration-300 hover:transform hover:scale-105 bg-transparent border-none p-0 focus:outline-none focus:ring-2 focus:ring-[#19331B] focus:ring-offset-2 rounded-lg"
+            className="flex gap-3 items-center justify-center cursor-pointer group transition-all duration-300 hover:transform hover:scale-105 bg-transparent border-none p-0 focus:outline-none focus:ring-0 focus:ring-[#19331B] focus:ring- rounded-lg"
             onClick={scrollToNext}
             aria-label="Scroll to next section"
           >
             <div className="relative">
-              <div className="w-7 h-12 rounded-full border border-[#2a5a2d] flex items-center justify-center bg-white shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:border-[#2a5a2d]">
-                <DotIcon className="w-6 h-6 text-[#19331B] group-hover:text-[#2a5a2d] animate-bounce" />
+              <div className="w-7 h-12 rounded-full border border-[#007aff] flex items-center justify-center bg-white shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:border-[#2a5a2d]">
+                <DotIcon className="w-6 h-6 text-[#007aff] group-hover:text-[#007aff] animate-bounce" />
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <span className="text-base font-medium text-[#19331B] group-hover:text-[#2a5a2d] transition-colors">
+              <span className="text-base font-medium text-[#007aff] transition-colors">
                 Keep scrolling to see how it works!
               </span>
             </div>
