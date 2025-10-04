@@ -199,7 +199,7 @@ export default function ROICalculator() {
             </div>
 
             {/* Business hours per day */}
-            <div>
+            {/* <div>
               <div className="flex justify-between items-center mb-2">
                 <label
                   htmlFor="business-hours"
@@ -265,10 +265,10 @@ export default function ROICalculator() {
               <p className="text-[18px] text-[#535353] mb-3 font-medium">
                 Hours per day your business is officially open
               </p>
-            </div>
+            </div> */}
 
             {/* Work days per week */}
-            <div>
+            {/* <div>
               <div className="flex justify-between items-center mb-2">
                 <label
                   htmlFor="work-days"
@@ -310,14 +310,14 @@ export default function ROICalculator() {
               <p className="text-[18px] text-[#535353] mb-3 font-medium">
                 Days per year your business operates
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* Right Section - Results Cards */}
         <div className="space-y-6">
           {/* Total Annual Benefit Card */}
-          <div className="bg-green-50 p-6 rounded-2xl">
+          <div className="bg-green-50 p-6 h-full grid items-center justify-center rounded-2xl">
             <div className="flex flex-col gap-[30px] items-center mb">
               <div className="voice-bg rounded-[10px] p-3 py-5">
                 <Image
@@ -342,7 +342,7 @@ export default function ROICalculator() {
           </div>
 
           {/* Revenue Recovery Card */}
-          <div className="bg-green-50 p-6 rounded-2xl">
+          {/* <div className="bg-green-50 p-6 rounded-2xl">
             <div className="flex flex-col xl:flex-row items-center gap-[18px] justify-center xl:justify-between">
               <div className="flex flex-col xl:flex-row items-center gap-[18px]">
                 <div className="voice-bg rounded-[10px] p-3">
@@ -366,10 +366,10 @@ export default function ROICalculator() {
                 ${revenueRecovery.toLocaleString()}
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Quick Impact Stats Card */}
-          <div className="bg-green-50 p-6 rounded-2xl">
+          {/* <div className="bg-green-50 p-6 rounded-2xl">
             <div className="flex flex-col md:flex-row items-center justify-between">
               <div>
                 <div className="flex items-center mb-4">
@@ -402,7 +402,7 @@ export default function ROICalculator() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

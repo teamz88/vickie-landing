@@ -10,13 +10,13 @@ export default function FAQ() {
   const faqData = [
     {
       key: "1",
-      title: "We offer AI receptionist",
+      title: "What services do you offer?",
       content: "We offer Vickie, a 24/7 multilingual voice AI receptionist for service businesses. Vickie answers and routes inbound calls, books jobs, updates your CRM, and also makes outbound follow-up calls so no lead or quote ever slips through."
     },
     {
       key: "2", 
       title: "How long does a typical project take?",
-      content: "Project timelines vary depending on complexity and scope. A simple website typically takes 2-4 weeks, while more complex applications can take 2-3 months. We'll provide a detailed timeline during our initial consultation."
+      content: "Project timelines vary depending on complexity and scope. A simple website typically takes 2-4 weeks, while more complex applications can take 5-7 weeks. We'll provide a detailed timeline during our initial consultation."
     },
     {
       key: "3",

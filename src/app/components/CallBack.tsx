@@ -1,5 +1,6 @@
 import Image from "next/image";
 import TalkVickie from "./TalkVickie";
+import VoiceCallButton from "./VoiceCallButton";
 
 export default function CallBack() {
   return (
@@ -8,9 +9,15 @@ export default function CallBack() {
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[62px] font-bold text-white leading-tight sm:leading-normal md:leading-snug lg:leading-tight xl:leading-[74px]">
           Start Automating Your Calls Today
         </h1>
-        <p className="text-lg sm:text-xl md:text-2xl lg:text-[26px] xl:text-[30px] font-medium text-white py-4 sm:py-6 md:py-7 lg:py-8 xl:py-[30px] leading-relaxed md:leading-relaxed lg:leading-[32px] xl:leading-[36px]">Turn every customer who calls into an appointment</p>
-        <div className="flex justify-center lg:justify-start xl:justify-start">
-          <TalkVickie />
+        <p className="text-lg sm:text-xl md:text-2xl lg:text-[26px] xl:text-[30px] font-medium text-white py-4 sm:py-6 md:py-7 lg:py-8 xl:py-[30px] leading-relaxed md:leading-relaxed lg:leading-[32px] xl:leading-[36px]">
+          Turn every customer who calls into an appointment
+        </p>
+        <div className="flex justify-center relative lg:justify-start xl:justify-start">
+          <VoiceCallButton
+          className="scale-80 lg:absolute lg:-left-14"
+            apiKey="5c2e1220-d870-46c4-9088-240fb4a0c7cb"
+            assistantId="e83457ac-5b83-4293-b68d-3057cab52a16"
+          />
         </div>
       </div>
       <div className="w-full lg:w-1/2 xl:w-1/2 flex items-center justify-center relative min-h-[300px] md:min-h-[350px] lg:min-h-[380px] xl:min-h-[400px]">

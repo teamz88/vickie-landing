@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import VoiceCallButton from "../components/VoiceCallButton";
 
 type CardData = {
   [key: number]: {
@@ -19,7 +20,6 @@ declare global {
 }
 
 export default function Missed() {
-
   const handleScheduleCall = () => {
     if (typeof window !== "undefined" && window.Calendly) {
       window.Calendly.initPopupWidget({
@@ -45,7 +45,7 @@ export default function Missed() {
   const handleCardClick = (cardNumber: number, event: React.MouseEvent) => {
     // Prevent card selection if clicking on the CTA button inside the card
     const target = event.target as HTMLElement;
-    if (target.closest('.book-demo')) {
+    if (target.closest(".book-demo")) {
       return;
     }
     setSelectedCard(cardNumber);
@@ -96,14 +96,13 @@ export default function Missed() {
                 of potential customers won't call back if they reach voicemail.
                 That's revenue walking out the door.
               </p>
-              <button type="button" onClick={handleScheduleCall} className="flex mt-6 md:mt-7 lg:mt-8 xl:mt-9 items-center justify-center gap-4.5 py-4 md:py-4 lg:py-4 px-4 md:px-5 lg:px-5 book-demo transition-all duration-300 ease-in w-full md:w-full lg:w-fit xl:w-fit rounded-full cursor-pointer">
-                <h1 className="text-lg md:text-lg lg:text-xl xl:text-xl font-semibold text-white flex-auto text-center">
-                  See AI Vickie in Action
-                </h1>
-                <div className="w-8 md:w-8 lg:w-9 xl:w-9 h-8 md:h-8 lg:h-9 xl:h-9 bg-white flex items-center justify-center rounded-full shrink-0">
-                  <ArrowRight className="w-4 text-black" />
-                </div>
-              </button>
+              <div className="flex h-20 relative justify-center lg:justify-start xl:justify-start">
+                <VoiceCallButton
+                  className="scale-75 lg:absolute lg:-left-16"
+                  apiKey="5c2e1220-d870-46c4-9088-240fb4a0c7cb"
+                  assistantId="e83457ac-5b83-4293-b68d-3057cab52a16"
+                />
+              </div>
             </div>
           </button>
 
@@ -134,7 +133,11 @@ export default function Missed() {
                 misses a call. It answers professionally, captures leads, books
                 appointments, and routes urgent calls to your team.
               </p>
-              <button type="button" onClick={handleScheduleCall} className="flex mt-6 md:mt-7 lg:mt-8 xl:mt-9 items-center justify-center gap-4.5 py-4 md:py-4 lg:py-4 px-4 md:px-5 lg:px-5 book-demo transition-all duration-300 ease-in w-full md:w-full lg:w-fit xl:w-fit rounded-full cursor-pointer">
+              <button
+                type="button"
+                onClick={handleScheduleCall}
+                className="flex mt-6 md:mt-7 lg:mt-8 xl:mt-9 items-center justify-center gap-4.5 py-4 md:py-4 lg:py-4 px-4 md:px-5 lg:px-5 book-demo transition-all duration-300 ease-in w-full md:w-full lg:w-fit xl:w-fit rounded-full cursor-pointer"
+              >
                 <h1 className="text-lg md:text-lg lg:text-xl xl:text-xl font-semibold text-white flex-auto text-center">
                   Book a Demo
                 </h1>
@@ -172,9 +175,13 @@ export default function Missed() {
                 appointments, and free up your team to focus on what they do
                 best. No more missed opportunities.
               </p>
-              <button type="button" onClick={handleScheduleCall} className="flex mt-6 md:mt-7 lg:mt-8 xl:mt-9 items-center justify-center gap-4.5 py-4 md:py-4 lg:py-4 px-4 md:px-5 lg:px-5 book-demo transition-all duration-300 ease-in w-full md:w-full lg:w-fit xl:w-fit rounded-full cursor-pointer">
+              <button
+                type="button"
+                onClick={handleScheduleCall}
+                className="flex mt-6 md:mt-7 lg:mt-8 xl:mt-9 items-center justify-center gap-4.5 py-4 md:py-4 lg:py-4 px-4 md:px-5 lg:px-5 book-demo transition-all duration-300 ease-in w-full md:w-full lg:w-fit xl:w-fit rounded-full cursor-pointer"
+              >
                 <h1 className="text-lg md:text-lg lg:text-xl xl:text-xl font-semibold text-white flex-auto text-center">
-                  Start Today
+                  Book a Demo
                 </h1>
                 <div className="w-8 md:w-8 lg:w-9 xl:w-9 h-8 md:h-8 lg:h-9 xl:h-9 bg-white flex items-center justify-center rounded-full shrink-0">
                   <ArrowRight className="w-4 text-black" />
@@ -186,7 +193,9 @@ export default function Missed() {
 
         {/* Right side - Image */}
         <div className="flex items-center justify-center">
-          <div className={`relative w-full h-[300px] md:h-[400px] lg:h-[500px] ${selectedCard === 1 ? 'lg:w-[700px] lg:h-[500px] xl:w-[900px] xl:h-[600px]' : 'lg:w-[500px] lg:h-[500px] xl:w-[600px] xl:h-[600px]'}`}>
+          <div
+            className={`relative w-full h-[300px] md:h-[400px] lg:h-[500px] ${selectedCard === 1 ? "lg:w-[700px] lg:h-[500px] xl:w-[900px] xl:h-[600px]" : "lg:w-[500px] lg:h-[500px] xl:w-[600px] xl:h-[600px]"}`}
+          >
             <Image
               src={cardData[selectedCard].image}
               alt={`Illustration for card ${selectedCard}`}

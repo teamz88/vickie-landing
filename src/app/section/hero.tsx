@@ -1,26 +1,26 @@
 "use client";
 
 import { Select, SelectItem } from "@heroui/react";
-import { DotIcon } from "lucide-react";
+// import { DotIcon } from "lucide-react";
 import Image from "next/image";
 import VoiceCallButton from "../components/VoiceCallButton";
 
 export default function Hero() {
-  const scrollToNext = () => {
-    const nextSection = document.querySelector("#next-section");
-    if (nextSection) {
-      nextSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    } else {
-      // If no specific section, scroll down by viewport height
-      window.scrollBy({
-        top: window.innerHeight,
-        behavior: "smooth",
-      });
-    }
-  };
+  // const scrollToNext = () => {
+  //   const nextSection = document.querySelector("#next-section");
+  //   if (nextSection) {
+  //     nextSection.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //     });
+  //   } else {
+       // If no specific section, scroll down by viewport height
+  //     window.scrollBy({
+  //       top: window.innerHeight,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
 
   return (
     <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-7 lg:px-7 xl:px-8 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-8 lg:gap-6 xl:gap-0 mt-8 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-[130px] mb-16 sm:mb-24 md:mb-28 lg:mb-32 xl:mb-[180px]">
@@ -33,7 +33,7 @@ export default function Hero() {
             variant="bordered"
             placeholder="Choose your industry"
             defaultSelectedKeys={["hvac"]}
-            className="w-full sm:w-52 md:w-52 lg:w-52"
+            className="w-full lg:w-64"
             classNames={{
               base: "w-full",
               trigger: "h-12 rounded-full border-2 border-[#43A047] bg-white hover:border-[#2a5a2d] focus:border-[#43A047] transition-all duration-200 shadow-sm hover:shadow-md",
@@ -62,7 +62,7 @@ export default function Hero() {
               Fire Alarms System Companies
             </SelectItem>
             <SelectItem key="legal">
-              Home Services
+              Home Services & Cleaning
             </SelectItem>
             <SelectItem key="automotive">
               Junk Removal
@@ -82,7 +82,7 @@ export default function Hero() {
         <p className="text-lg md:text-lg lg:text-xl xl:text-xl font-medium text-[#19331B] py-6 md:py-7 lg:py-8 xl:py-[30px]">
           Turn every customer who calls into an appointment
         </p>
-        <div className="flex flex-col lg:items-start xl:items-start items-center space-y-4">
+        {/* <div className="flex flex-col lg:items-start xl:items-start items-center space-y-4">
           <button
             type="button"
             className="flex gap-3 items-center justify-center cursor-pointer group transition-all duration-300 hover:transform hover:scale-105 bg-transparent border-none p-0 focus:outline-none focus:ring-0 focus:ring-[#19331B] focus:ring- rounded-lg"
@@ -100,7 +100,7 @@ export default function Hero() {
               </span>
             </div>
           </button>
-        </div>
+        </div> */}
       </div>
       <div className="flex items-center justify-center relative z-0 h-[713px]">
         <iframe 
@@ -111,7 +111,7 @@ export default function Hero() {
         <Image
           src="/heroright.png"
           alt="AI voice assistant analytics dashboard showing call conversion metrics"
-          className="max-w-none shrink-0 absolute -right-[450px] xl:-right-[350px] w-[1200px] h-auto"
+          className="hidden lg:block max-w-none shrink-0 absolute -right-[450px] xl:-right-[350px] w-[1200px] h-auto"
           width={1200}
           height={488}
           priority

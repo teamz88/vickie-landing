@@ -84,7 +84,7 @@ export default function VoiceCallButton({
       case "processing":
         return "Processing...";
       default:
-        return "Hear Vickie Handle a Real Call";
+        return "Try Vickie Handle a Real Call";
     }
   };
 
