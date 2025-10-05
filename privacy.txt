@@ -1,0 +1,48 @@
+**Privacy Policy**
+
+At **Omadli LLC**, we value your trust and privacy. This policy explains how information is collected, used, and protected when you or your customers interact with **Vickie AI**, our voice assistant service.
+
+### **1. Information We Collect**
+
+Vickie may collect:
+
+- Call recordings, transcriptions, caller details, and message content.
+- Business contact information provided through forms or integrations.
+- Technical data such as IP address and device identifiers to maintain service reliability.
+
+### **2. How We Use Information**
+
+We use collected data to:
+
+- Deliver and improve Vickie’s performance and accuracy.
+- Provide analytics and call summaries to your business.
+- Support integration with CRMs, scheduling tools, and messaging systems.
+- Maintain security and prevent misuse of the platform.
+
+### **3. Your Ownership and Access**
+
+All data collected from your calls and logs **belongs to you**.
+
+You will have access to these records through your connected dashboard or reports.
+
+Omadli LLC may retain secure copies only for service quality, troubleshooting, or legal compliance—never for resale or marketing use.
+
+### **4. Data Security**
+
+We use industry-standard encryption, access controls, and monitoring to protect information from unauthorized access. While no system is perfectly secure, we continuously improve safeguards to keep your data safe.
+
+### **5. Sharing of Information**
+
+We may share limited information with trusted technology partners (such as phone or CRM providers) solely to enable Vickie’s features. All partners follow confidentiality and data-protection requirements.
+
+### **6. Call Recordings and Training**
+
+With your consent, Vickie may share call recordings or transcripts with your team for internal training and service improvement. These materials are never shared outside your organization.
+
+### **7. Data Retention and Deletion**
+
+Data is stored only as long as needed to provide services or meet legal obligations. You can request deletion or export of your data anytime by emailing **privacy@omadli.com**.
+
+### **8. Policy Updates**
+
+We may update this policy to reflect new features or legal requirements. The revised date will always appear at the top of this page. Continued use of Vickie means you accept the current version.

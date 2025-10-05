@@ -37,9 +37,7 @@ export default function Footer() {
               <ul className="space-y-2 xl:space-y-4 text-base sm:text-lg xl:text-[20px]">
                 <li>
                   <a
-                    href="https://omadligroup.com/terms-and-conditions/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/terms-and-conditions/"
                     className="hover:text-green-600 transition-colors"
                   >
                     Terms & Conditions
@@ -47,9 +45,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://omadligroup.com/privacy-policy-2/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/privacy-policy/"
                     className="hover:text-green-600 transition-colors"
                   >
                     Privacy Policy
