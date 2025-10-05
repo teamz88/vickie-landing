@@ -105,7 +105,7 @@ export default function Hero() {
       <div className="flex items-center justify-center relative z-0 h-[713px]">
         <iframe 
           src="/player.html" 
-          className="w-[334px] h-[713px] border-0 absolute z-10 xl:right-28" 
+          className="w-full max-w-[334px] h-[713px] border-0 z-10 xl:absolute xl:right-28" 
           title="Vickie AI Player"
         />
         <Image
@@ -117,7 +117,7 @@ export default function Hero() {
           priority
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
           placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAhEQACAQIHAQAAAAAAAAAAAAABAgADBAUREiExkbHB8f/aAAwDAQACEQMRAD8A0XYobhLFXUvjvQdJjlk+vHnUMTvwjRR+B2ELuM17kAiJmfLvZMwPvzSfBKy2C9Cxk+XsVBnk5EgAv//Z"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAhEQACAQIHAQAAAAAAAAAAAAABAgADBAUREiExkbHB8f/aAAwDAQACEQMRAD8A0XYobhLFXUvjvQdJjlk+vHnUMTvwjRR+B2ELuM17kAiJmfLvZMwPvzSfBKy2C9Cxk+XsVBnk5EgAv//Z"
         />
       </div>
     </div>

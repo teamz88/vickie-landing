@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="max-w-[1440px] mx-auto relative z-10 px-4 sm:px-6">
         <CallBack />
         <div className="flex flex-col xl:flex-row items-start justify-between py-8 xl:py-14 xl:pt-[120px] gap-8 xl:gap-0">
-          <div className="space-y-3 xl:space-y-5 w-full xl:w-auto">
+          <div className="space-y-3 xl:space-y-5 w-full lg:w-[325px] shrink-0 lg:mr-10">
             <NavLogo />
             <p className="text-base text-center xl:text-left sm:text-lg xl:text-[20px]">AI that converts leads into money</p>
           </div>

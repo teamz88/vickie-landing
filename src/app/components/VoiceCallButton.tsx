@@ -148,7 +148,7 @@ export default function VoiceCallButton({
       onKeyDown={handleKeyDown}
       aria-label={getStatusText()}
     >
-      <p className={`text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-[24px] font-medium leading-6 md:leading-6 lg:leading-6 xl:leading-[24px] transition-colors duration-300 ${getStatusColor()}`}>
+      <p className={`text-lg line-clamp-1 sm:text-xl md:text-xl lg:text-2xl xl:text-[24px] font-medium leading-6 md:leading-6 lg:leading-6 xl:leading-[24px] transition-colors duration-300 ${getStatusColor()}`}>
         {getStatusText()}
       </p>
       <div className={`size-12 md:size-14 lg:size-16 xl:size-[68px] rounded-full flex items-center justify-center pt-1 pl-1 shrink-0 transition-all duration-300 ${getMicStyle()}`}>
