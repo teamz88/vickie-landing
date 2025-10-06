@@ -202,7 +202,7 @@ export default function What() {
 
           {/* Touch/Swipe Support */}
           <div
-            className="absolute inset-0 pointer-events-none"
+            className="absolute inset-0"
             onTouchStart={(e) => {
               const touch = e.touches[0];
               const startX = touch.clientX;
