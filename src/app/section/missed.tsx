@@ -92,7 +92,7 @@ export default function Missed() {
               }`}
             >
               <p className="text-base md:text-base lg:text-lg leading-relaxed mt-5 md:mt-6 lg:mt-6">
-                Every missed call is a lost opportunity. Studies show that 27%
+                Every missed call is a lost opportunity. Studies show that <span className="font-bold text-orange-500">27%</span>
                 of potential customers won't call back if they reach voicemail.
                 That's revenue walking out the door.
               </p>
@@ -129,7 +129,7 @@ export default function Missed() {
               }`}
             >
               <p className="text-base md:text-base lg:text-lg leading-relaxed mt-5 md:mt-6 lg:mt-6">
-                AI Vickie Voice is your 24/7 virtual receptionist that never
+                AI Vickie Voice is your <span className="font-bold text-orange-500">24/7</span> virtual receptionist that never
                 misses a call. It answers professionally, captures leads, books
                 appointments, and routes urgent calls to your team.
               </p>

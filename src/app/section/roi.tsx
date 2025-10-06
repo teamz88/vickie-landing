@@ -332,7 +332,7 @@ export default function ROICalculator() {
               </h3>
             </div>
             <div className="flex items-center justify-center w-full mt-8">
-              <div className="bg-green-700 text-center text-white rounded-[15px] font-semibold text-[36px] leading-[44px] p-[26px] mb-3 w-[330px]">
+              <div className="bg-green-700 text-center text-white rounded-[15px] font-semibold text-[36px] leading-[44px] p-[26px] mb-3 w-full lg:w-[330px]">
                 ${totalAnnualBenefit.toLocaleString()}
                 <p className="text-[18px] text-white font-medium">
                   Revenue recovery potential

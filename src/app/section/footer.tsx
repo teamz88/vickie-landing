@@ -24,10 +24,26 @@ export default function Footer() {
                   <a href="/" className="hover:text-green-600 transition-colors">Home</a>
                 </li>
                 <li>
-                  <a href="/features" className="hover:text-green-600 transition-colors">Features</a>
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      window.scrollTo({ top: document.getElementById('features')?.offsetTop, behavior: 'smooth' });
+                    }}
+                    className="hover:text-green-600 transition-colors cursor-pointer"
+                  >
+                    Features
+                  </button>
                 </li>
                 <li>
-                  <a href="/demo" className="hover:text-green-600 transition-colors">Demo</a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      window.scrollTo({ top: document.getElementById('demo')?.offsetTop, behavior: 'smooth' });
+                    }}
+                    className="hover:text-green-600 transition-colors cursor-pointer"
+                  >
+                    Demo
+                  </button>
                 </li>
               </ul>
             </div>
@@ -122,7 +138,7 @@ export default function Footer() {
             <p className="text-lg sm:text-xl xl:text-[26px]">Follow Us</p>
             <div className="flex items-center justify-center gap-2 sm:gap-3">
               <a
-                href="https://www.facebook.com/"
+                href="https://www.facebook.com/profile.php?id=61557942777211"
                 className="size-[40px] sm:size-[50px] xl:size-[60px] bg-[#1c5e20] hover:bg-[#3e8842] transition-all duration-300 ease-in rounded-full flex items-center justify-center"
               >
                 <Image
@@ -135,7 +151,7 @@ export default function Footer() {
                 />
               </a>
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/zulfiyaforsythe/"
                 className="size-[40px] sm:size-[50px] xl:size-[60px] bg-[#1c5e20] hover:bg-[#3e8842] transition-all duration-300 ease-in rounded-full flex items-center justify-center"
               >
                 <Image
@@ -148,7 +164,7 @@ export default function Footer() {
                 />
               </a>
               <a
-                href="https://www.linkedin.com/"
+                href="https://www.linkedin.com/in/zulfiya-forsythe-akbarova-cpa-0214b98/"
                 className="size-[40px] sm:size-[50px] xl:size-[60px] bg-[#1c5e20] hover:bg-[#3e8842] transition-all duration-300 ease-in rounded-full flex items-center justify-center"
               >
                 <Image
@@ -161,7 +177,7 @@ export default function Footer() {
                 />
               </a>
               <a
-                href="https://www.youtube.com/"
+                href="https://www.youtube.com/@zulfiyaforsythe/featured"
                 className="size-[40px] sm:size-[50px] xl:size-[60px] bg-[#1c5e20] hover:bg-[#3e8842] transition-all duration-300 ease-in rounded-full flex items-center justify-center"
               >
                 <Image
