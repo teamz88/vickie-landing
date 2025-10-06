@@ -17,6 +17,10 @@ export default function What() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  // Add touch handling refs
+  const touchStartXRef = useRef<number | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
+  const hasSwipedRef = useRef<boolean>(false);
 
   const handleScheduleCall = () => {
     if (typeof window !== "undefined" && window.Calendly) {
@@ -154,7 +158,36 @@ export default function What() {
         {/* Mobile Swipable Layout */}
         <div className="xl:hidden relative z-10 w-full">
           {/* Swipable Container */}
-          <div ref={scrollContainerRef} className="w-[334px] h-full">
+          <div
+            ref={scrollContainerRef}
+            className="w-[334px] h-full"
+            onTouchStart={(e) => {
+              const touch = e.touches[0];
+              touchStartXRef.current = touch.clientX;
+              touchStartYRef.current = touch.clientY;
+              hasSwipedRef.current = false;
+            }}
+            onTouchMove={(e) => {
+              if (touchStartXRef.current === null || hasSwipedRef.current) return;
+              const touch = e.touches[0];
+              const diffX = (touchStartXRef.current ?? touch.clientX) - touch.clientX;
+              const diffY = (touchStartYRef.current ?? touch.clientY) - touch.clientY;
+              if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
+                e.preventDefault();
+                if (diffX > 0) {
+                  nextSlide();
+                } else {
+                  prevSlide();
+                }
+                hasSwipedRef.current = true;
+              }
+            }}
+            onTouchEnd={() => {
+              touchStartXRef.current = null;
+              touchStartYRef.current = null;
+              hasSwipedRef.current = false;
+            }}
+          >
             <div
               className="flex transition-transform duration-300 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -201,36 +234,7 @@ export default function What() {
           </div>
 
           {/* Touch/Swipe Support */}
-          <div
-            className="absolute inset-0"
-            onTouchStart={(e) => {
-              const touch = e.touches[0];
-              const startX = touch.clientX;
-
-              const handleTouchMove = (moveEvent: TouchEvent) => {
-                const currentTouch = moveEvent.touches[0];
-                const diffX = startX - currentTouch.clientX;
-
-                if (Math.abs(diffX) > 50) {
-                  if (diffX > 0) {
-                    nextSlide();
-                  } else {
-                    prevSlide();
-                  }
-                  document.removeEventListener("touchmove", handleTouchMove);
-                  document.removeEventListener("touchend", handleTouchEnd);
-                }
-              };
-
-              const handleTouchEnd = () => {
-                document.removeEventListener("touchmove", handleTouchMove);
-                document.removeEventListener("touchend", handleTouchEnd);
-              };
-
-              document.addEventListener("touchmove", handleTouchMove);
-              document.addEventListener("touchend", handleTouchEnd);
-            }}
-          />
+          {/* Removed overlay to allow dots to remain clickable and to prevent blocking touches */}
         </div>
 
         <div className="flex items-center justify-center mt-8 xl:mt-[16px]">
