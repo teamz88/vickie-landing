@@ -176,3 +176,8 @@ body {
 .voice-bg {
   background: linear-gradient(-24.99deg, rgba(164, 214, 168, 1),rgba(47, 125, 51, 1) 100%);
 }
+
+/* HeroUI Slider Primary Color Override */
+.data-\[fill-start\=true\]\:border-s-primary[data-fill-start="true"]:not(:is(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+  border-left-color: rgb(34 197 94) !important; /* green-500 */
+}

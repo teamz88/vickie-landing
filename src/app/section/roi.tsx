@@ -2,407 +2,497 @@
 
 import React, { useState } from "react";
 import { Input, Slider, Select, SelectItem, Button } from "@heroui/react";
-import { TrendingUp, Phone, BarChart3 } from "lucide-react";
+import { TrendingUp, Phone, BarChart3, Clock, Target, DollarSign, MessageSquare, Star, AlertTriangle } from "lucide-react";
 import Image from "next/image";
 
 export default function ROICalculator() {
-  const [callsPerWeek, setCallsPerWeek] = useState(25);
-  const [avgDealValue, setAvgDealValue] = useState(200);
-  const [currentAnswerRate, setCurrentAnswerRate] = useState(38);
-  const [businessHoursPerDay, setBusinessHoursPerDay] = useState(6.5);
-  const [workDaysPerWeek, setWorkDaysPerWeek] = useState(5);
+  // Basic Business Metrics
+  const [industry, setIndustry] = useState("");
+  const [annualRevenue, setAnnualRevenue] = useState(2000000);
+  const [callVolumeWeekly, setCallVolumeWeekly] = useState(100);
+  const [avgJobValue, setAvgJobValue] = useState(2500);
+  
+  // Revenue Leak Metrics
+  const [missedCallRate, setMissedCallRate] = useState(25);
+  const [responseTime, setResponseTime] = useState(60);
+  const [estimateSpeed, setEstimateSpeed] = useState(2);
+  const [followUpRate, setFollowUpRate] = useState(50);
 
-  // Constants
-  const conversionRate = 0.33; // 33%
+  // Advanced ROI Calculation Constants (from get-revenue-back)
+  const conversionRate = 0.33; // 33% baseline conversion rate
+  const followUpConversionRate = 0.24; // 24% for follow-up calls
   const weeksPerYear = 52;
+  const monthsPerYear = 12;
+  
+  // Derived Calculations
+  const monthlyRevenue = annualRevenue / monthsPerYear;
+  const leadsPerMonth = callVolumeWeekly * 4.33; // Average weeks per month
+  const missedRate = missedCallRate / 100;
+  const followUpRate_pct = followUpRate;
+  const followUpRate_decimal = followUpRate / 100;
+  
+  // Core ROI Calculations (matching get-revenue-back logic)
+  const missedCalls = leadsPerMonth * missedRate;
+  const missedCallLoss_raw = missedCalls * conversionRate * avgJobValue;
+  const missedCallLoss = Math.round(missedCallLoss_raw);
+  
+  // Follow-up Recovery Calculation
+  const potentialFollowupRecovery_raw = leadsPerMonth * (1 - followUpRate_decimal) * followUpConversionRate * avgJobValue;
+  const potentialFollowupRecovery = Math.round(potentialFollowupRecovery_raw);
+  
+  // Total Loss Calculations
+  const totalMonthlyLoss = Math.round(missedCallLoss + potentialFollowupRecovery);
+  const annualLoss = totalMonthlyLoss * monthsPerYear;
+  
+  // Revenue Efficiency Score Calculation
+  const missedCallScore = Math.max(0, 100 - (missedRate * 100));
+  const followUpScore = Math.max(0, followUpRate_pct);
+  const revenueEfficiencyScore = Math.round((missedCallScore + followUpScore) / 2);
+  
+  // Additional Metrics
+  const responseTimeScore = responseTime <= 15 ? 100 : responseTime <= 60 ? 80 : responseTime <= 240 ? 60 : 40;
+  const estimateSpeedScore = estimateSpeed <= 1 ? 100 : estimateSpeed <= 2 ? 80 : estimateSpeed <= 5 ? 60 : 40;
+  
+  // Recovery Potential
+  const totalAnnualBenefit = annualLoss;
+  const monthlyRecoveryPotential = totalMonthlyLoss;
 
-  // Calculations
-  const missedCallsPerWeek = callsPerWeek * (1 - currentAnswerRate / 100);
-  const missedCallsPerYear = missedCallsPerWeek * weeksPerYear;
-  const revenueRecoveryPerCall = avgDealValue * conversionRate;
-  const monthlyRecoveryPotential =
-    (missedCallsPerWeek * revenueRecoveryPerCall * 52) / 12;
-  const totalAnnualBenefit = missedCallsPerYear * revenueRecoveryPerCall;
-  const revenueRecovery = totalAnnualBenefit * 0.05; // 5% of total potential
+  // Score Labels
+  const getScoreLabel = (score: number): string => {
+    if (score >= 80) return "Excellent";
+    if (score >= 60) return "Good"; 
+    if (score >= 40) return "Needs Improvement";
+    return "Critical Issues";
+  };
 
   return (
     <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 xl:px-8 py-8 xl:py-12 bg-white">
       {/* Header */}
       <div className="text-center mb-8 xl:mb-12">
         <h2 className="text-3xl sm:text-4xl xl:text-[62px] leading-tight sm:leading-tight xl:leading-[79px] font-bold text-[#19331B] mb-4 px-4">
-          ROI Calculator
+         ROI Calculator
         </h2>
         <p className="text-lg xl:text-xl text-[#535353] mx-auto font-medium px-4 max-w-4xl">
-          Discover How Much Revenue You're Losing To Missed Calls And See The
-          Potential Return On Investment With Vickie Voice.
+          Comprehensive Revenue Loss Analysis & Recovery Assessment - Discover exactly how much revenue you're losing and your recovery potential.
         </p>
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-8">
-        {/* Left Section - Input Form */}
-        <div className="bg-green-50 p-6 xl:p-8 rounded-2xl">
-          <h3 className="text-2xl sm:text-3xl xl:text-[40px] leading-tight xl:leading-[44px] font-semibold text-[#19331B] mb-6">
-            Fill In Your Business Metrics
+        {/* Left Section - Comprehensive Input Form */}
+        <div className="bg-green-50 p-6 xl:p-8 rounded-2xl space-y-6">
+          <h3 className="text-2xl sm:text-3xl xl:text-[32px] leading-tight xl:leading-[36px] font-semibold text-[#19331B] mb-6">
+            Business Profile & Revenue Metrics
           </h3>
 
-          <div className="space-y-6 xl:space-y-8">
-            {/* Calls per week */}
+          {/* Company Information */}
+          <div className="space-y-4">
             <div>
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2 gap-2">
-                <label
-                  htmlFor="calls-per-week"
-                  className="text-base xl:text-[18px] font-medium text-gray-700"
-                >
-                  Calls per week
-                </label>
-                <Input
-                  id="calls-per-week"
-                  type="number"
-                  value={callsPerWeek.toString()}
-                  onChange={(e) => setCallsPerWeek(Number(e.target.value))}
-                  className="w-full sm:w-20"
-                  size="sm"
-                  classNames={{
-                    input: "bg-green-100 text-center",
-                    inputWrapper: "bg-green-100 border-green-300",
-                  }}
-                />
-              </div>
-              <Slider
-                size="md"
-                step={1}
-                minValue={1}
-                maxValue={200}
-                value={callsPerWeek}
-                onChange={(value) =>
-                  setCallsPerWeek(Array.isArray(value) ? value[0] : value)
-                }
-                className="w-full"
-                aria-label="Calls per week slider"
-                classNames={{
-                  track: "bg-green-200",
-                  filler: "bg-green-500",
-                  thumb: "bg-green-600 border-green-700",
-                }}
-              />
-              <p className="text-[18px] text-[#535353] mb-3 font-medium">
-                Average number of incoming calls your business receives weekly
-              </p>
+              <label className="text-[18px] font-medium text-[#535353] mb-2 block">
+                Industry
+              </label>
+              <Select
+                 value={industry}
+                 onSelectionChange={(value) => setIndustry(Array.from(value)[0] as string)}
+                 placeholder="Select your industry"
+                 className="w-full"
+                 classNames={{
+                   trigger: "bg-green-100 border-green-300",
+                 }}
+               >
+                 <SelectItem key="hvac">🔥 HVAC (Heating/Cooling/Refrigeration)</SelectItem>
+                 <SelectItem key="plumbing">🔧 Plumbing (Residential/Commercial)</SelectItem>
+                 <SelectItem key="fire-safety">🚨 Fire Alarm & Safety Systems</SelectItem>
+                 <SelectItem key="restoration">🏠 Restoration (Water/Fire/Mold Damage)</SelectItem>
+                 <SelectItem key="cleaning">🧹 Cleaning Services</SelectItem>
+                 <SelectItem key="moving">📦 Moving & Junk Removal</SelectItem>
+               </Select>
             </div>
+          </div>
 
-            {/* Average deal value */}
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <label
-                  htmlFor="avg-deal-value"
-                  className="text-[18px] font-medium text-[#535353]"
-                >
-                  Average deal value
-                </label>
-                <Input
-                  id="avg-deal-value"
-                  type="number"
-                  value={avgDealValue.toString()}
-                  onChange={(e) => setAvgDealValue(Number(e.target.value))}
-                  className="w-24"
-                  size="sm"
-                  startContent="$"
-                  classNames={{
-                    input: "bg-green-100 text-center",
-                    inputWrapper: "bg-green-100 border-green-300",
-                  }}
-                />
-              </div>
-              <Slider
-                size="md"
-                step={10}
-                minValue={50}
-                maxValue={5000}
-                value={avgDealValue}
-                onChange={(value) =>
-                  setAvgDealValue(Array.isArray(value) ? value[0] : value)
-                }
-                className="w-full"
-                aria-label="Average deal value slider"
+          {/* Annual Revenue */}
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-[18px] font-medium text-[#535353]">
+                Annual Revenue
+              </label>
+              <Input
+                type="text"
+                value={`$${(annualRevenue / 1000000).toFixed(1)}M`}
+                readOnly
+                className="w-24"
+                size="sm"
                 classNames={{
-                  track: "bg-green-200",
-                  filler: "bg-green-500",
-                  thumb: "bg-green-600 border-green-700",
+                  input: "bg-green-100 text-center",
+                  inputWrapper: "bg-green-100 border-green-300",
                 }}
               />
-              <p className="text-[18px] text-[#535353] mb-3 font-medium">
-                Average revenue per customer/project
-              </p>
             </div>
+            <Slider
+              size="md"
+              step={250000}
+              minValue={500000}
+              maxValue={20000000}
+              value={annualRevenue}
+              onChange={(value) => setAnnualRevenue(Array.isArray(value) ? value[0] : value)}
+              className="w-full"
+              classNames={{
+                track: "bg-green-200",
+                filler: "bg-green-500",
+                thumb: "bg-green-600 border-green-700",
+              }}
+            />
+            <p className="text-[16px] text-[#535353] mt-2 font-medium">
+              Your total annual business revenue
+            </p>
+          </div>
 
-            {/* Current answer rate */}
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <label
-                  htmlFor="answer-rate"
-                  className="text-[18px] font-medium text-[#535353]"
-                >
-                  Current answer rate
-                </label>
-                <Select
-                  id="answer-rate"
-                  size="sm"
-                  selectedKeys={new Set([currentAnswerRate.toString()])}
-                  onSelectionChange={(keys) => {
-                    const value = Array.from(keys)[0] as string;
-                    setCurrentAnswerRate(Number(value));
-                  }}
-                  className="w-20"
-                  classNames={{
-                    trigger: "bg-green-100 border-green-300 min-h-8",
-                    value: "text-center text-gray-900 font-medium",
-                    selectorIcon: "text-gray-600",
-                  }}
-                  aria-label="Current answer rate"
-                  disallowEmptySelection
-                  renderValue={(items) => {
-                    return items.map((item) => (
-                      <span key={item.key}>{item.textValue}</span>
-                    ));
-                  }}
-                >
-                  {[20, 25, 30, 35, 38, 40, 45, 50, 55, 60, 65, 70, 75, 80].map(
-                    (rate) => (
-                      <SelectItem key={rate.toString()} textValue={`${rate}%`}>
-                        {rate}%
-                      </SelectItem>
-                    ),
-                  )}
-                </Select>
-              </div>
-
-              <Slider
-                size="md"
-                step={1}
-                minValue={10}
-                maxValue={90}
-                value={currentAnswerRate}
-                onChange={(value) =>
-                  setCurrentAnswerRate(Array.isArray(value) ? value[0] : value)
-                }
-                className="w-full"
-                aria-label="Current answer rate slider"
+          {/* Monthly Call Volume */}
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-[18px] font-medium text-[#535353]">
+                Monthly Inbound Calls
+              </label>
+              <Input
+                type="number"
+                value={Math.round(leadsPerMonth).toString()}
+                readOnly
+                className="w-24"
+                size="sm"
                 classNames={{
-                  track: "bg-green-200",
-                  filler: "bg-green-500",
-                  thumb: "bg-green-600 border-green-700",
+                  input: "bg-green-100 text-center",
+                  inputWrapper: "bg-green-100 border-green-300",
                 }}
               />
-              <p className="text-[18px] text-[#535353] mb-3 font-medium">
-                Percentage of calls your team currently answers
-              </p>
             </div>
+            <Slider
+              size="md"
+              step={10}
+              minValue={40}
+              maxValue={1000}
+              value={callVolumeWeekly}
+              onChange={(value) => setCallVolumeWeekly(Array.isArray(value) ? value[0] : value)}
+              className="w-full"
+              classNames={{
+                track: "bg-green-200",
+                filler: "bg-green-500",
+                thumb: "bg-green-600 border-green-700",
+              }}
+            />
+            <p className="text-[16px] text-[#535353] mt-2 font-medium">
+              Weekly calls (leads, customers, vendors)
+            </p>
+          </div>
 
-            {/* Business hours per day */}
-            {/* <div>
-              <div className="flex justify-between items-center mb-2">
-                <label
-                  htmlFor="business-hours"
-                  className="text-[18px] font-medium text-[#535353]"
-                >
-                  Business hours per day
-                </label>
-                <Select
-                  id="business-hours"
-                  size="sm"
-                  selectedKeys={new Set([businessHoursPerDay.toString()])}
-                  onSelectionChange={(keys) => {
-                    const value = Array.from(keys)[0] as string;
-                    setBusinessHoursPerDay(Number(value));
-                  }}
-                  className="w-20"
-                  classNames={{
-                    trigger: "bg-green-100 border-green-300 min-h-8",
-                    value: "text-center text-gray-900 font-medium",
-                    selectorIcon: "text-gray-600",
-                  }}
-                  aria-label="Business hours per day"
-                  disallowEmptySelection
-                  renderValue={(items) => {
-                    return items.map((item) => (
-                      <span key={item.key}>{item.textValue}</span>
-                    ));
-                  }}
-                >
-                  {[
-                    4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5,
-                    11, 11.5, 12,
-                  ].map((hours) => (
-                    <SelectItem
-                      key={hours.toString()}
-                      textValue={hours.toString()}
-                    >
-                      {hours}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-
-              <Slider
-                size="md"
-                step={0.5}
-                minValue={4}
-                maxValue={12}
-                value={businessHoursPerDay}
-                onChange={(value) =>
-                  setBusinessHoursPerDay(
-                    Array.isArray(value) ? value[0] : value,
-                  )
-                }
-                className="w-full"
-                aria-label="Business hours per day slider"
+          {/* Average Job Value */}
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-[18px] font-medium text-[#535353]">
+                Average Job Value
+              </label>
+              <Input
+                type="number"
+                value={avgJobValue.toString()}
+                onChange={(e) => setAvgJobValue(Number(e.target.value))}
+                className="w-32"
+                size="sm"
+                startContent="$"
                 classNames={{
-                  track: "bg-green-200",
-                  filler: "bg-green-500",
-                  thumb: "bg-green-600 border-green-700",
+                  input: "bg-green-100 text-center",
+                  inputWrapper: "bg-green-100 border-green-300",
                 }}
               />
-              <p className="text-[18px] text-[#535353] mb-3 font-medium">
-                Hours per day your business is officially open
-              </p>
-            </div> */}
+            </div>
+            <Slider
+              size="md"
+              step={100}
+              minValue={200}
+              maxValue={25000}
+              value={avgJobValue}
+              onChange={(value) => setAvgJobValue(Array.isArray(value) ? value[0] : value)}
+              className="w-full"
+              classNames={{
+                track: "bg-green-200",
+                filler: "bg-green-500",
+                thumb: "bg-green-600 border-green-700",
+              }}
+            />
+            <p className="text-[16px] text-[#535353] mt-2 font-medium">
+              Average revenue per job/project
+            </p>
+          </div>
 
-            {/* Work days per week */}
-            {/* <div>
-              <div className="flex justify-between items-center mb-2">
-                <label
-                  htmlFor="work-days"
-                  className="text-[18px] font-medium text-[#535353]"
-                >
-                  Work days per week
-                </label>
-                <Input
-                  id="work-days"
-                  type="number"
-                  value={workDaysPerWeek.toString()}
-                  onChange={(e) => setWorkDaysPerWeek(Number(e.target.value))}
-                  className="w-20"
-                  size="sm"
-                  classNames={{
-                    input: "bg-green-100 text-center",
-                    inputWrapper: "bg-green-100 border-green-300",
-                  }}
-                />
-              </div>
+          {/* Revenue Leak Analysis */}
+          <h4 className="text-xl font-semibold text-[#19331B] mt-8 mb-4">Revenue Leak Analysis</h4>
 
-              <Slider
-                size="md"
-                step={1}
-                minValue={1}
-                maxValue={7}
-                value={workDaysPerWeek}
-                onChange={(value) =>
-                  setWorkDaysPerWeek(Array.isArray(value) ? value[0] : value)
-                }
-                className="w-full"
-                aria-label="Work days per week slider"
+          {/* Missed Call Rate */}
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-[18px] font-medium text-[#535353]">
+                Missed Call Rate
+              </label>
+              <Input
+                type="number"
+                value={missedCallRate.toString()}
+                onChange={(e) => setMissedCallRate(Number(e.target.value))}
+                className="w-20"
+                size="sm"
+                endContent="%"
                 classNames={{
-                  track: "bg-green-200",
-                  filler: "bg-green-500",
-                  thumb: "bg-green-600 border-green-700",
+                  input: "bg-green-100 text-center",
+                  inputWrapper: "bg-green-100 border-green-300",
                 }}
               />
-              <p className="text-[18px] text-[#535353] mb-3 font-medium">
-                Days per year your business operates
-              </p>
-            </div> */}
+            </div>
+            <Slider
+              size="md"
+              step={1}
+              minValue={0}
+              maxValue={80}
+              value={missedCallRate}
+              onChange={(value) => setMissedCallRate(Array.isArray(value) ? value[0] : value)}
+              className="w-full"
+              classNames={{
+                track: "bg-green-200",
+                filler: "bg-green-500",
+                thumb: "bg-green-600 border-green-700",
+              }}
+            />
+            <p className="text-[16px] text-[#535353] mt-2 font-medium">
+              Percentage of calls that go to voicemail
+            </p>
+          </div>
+
+          {/* Follow-up Rate */}
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-[18px] font-medium text-[#535353]">
+                Follow-up Rate
+              </label>
+              <Input
+                type="number"
+                value={followUpRate.toString()}
+                onChange={(e) => setFollowUpRate(Number(e.target.value))}
+                className="w-20"
+                size="sm"
+                endContent="%"
+                classNames={{
+                  input: "bg-green-100 text-center",
+                  inputWrapper: "bg-green-100 border-green-300",
+                }}
+              />
+            </div>
+            <Slider
+              size="md"
+              step={5}
+              minValue={0}
+              maxValue={100}
+              value={followUpRate}
+              onChange={(value) => setFollowUpRate(Array.isArray(value) ? value[0] : value)}
+              className="w-full"
+              classNames={{
+                track: "bg-green-200",
+                filler: "bg-green-500",
+                thumb: "bg-green-600 border-green-700",
+              }}
+            />
+            <p className="text-[16px] text-[#535353] mt-2 font-medium">
+              Percentage of leads that get proper follow-up
+            </p>
+          </div>
+
+          {/* Response Time */}
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-[18px] font-medium text-[#535353]">
+                Response Time (minutes)
+              </label>
+              <Input
+                type="number"
+                value={responseTime.toString()}
+                onChange={(e) => setResponseTime(Number(e.target.value))}
+                className="w-24"
+                size="sm"
+                classNames={{
+                  input: "bg-green-100 text-center",
+                  inputWrapper: "bg-green-100 border-green-300",
+                }}
+              />
+            </div>
+            <Slider
+              size="md"
+              step={5}
+              minValue={5}
+              maxValue={480}
+              value={responseTime}
+              onChange={(value) => setResponseTime(Array.isArray(value) ? value[0] : value)}
+              className="w-full"
+              classNames={{
+                track: "bg-green-200",
+                filler: responseTime <= 60 ? "bg-green-500" : responseTime <= 240 ? "bg-yellow-500" : "bg-red-500",
+                thumb: responseTime <= 60 ? "bg-green-600 border-green-700" : responseTime <= 240 ? "bg-yellow-600 border-yellow-700" : "bg-red-600 border-red-700",
+              }}
+              key={`response-time-${responseTime}`}
+            />
+            <p className="text-[16px] text-[#535353] mt-2 font-medium">
+              Average time to respond to new leads
+            </p>
           </div>
         </div>
 
-        {/* Right Section - Results Cards */}
+        {/* Right Section - Results Dashboard */}
         <div className="space-y-6">
-          {/* Total Annual Benefit Card */}
-          <div className="bg-green-50 p-6 h-full grid items-center justify-center rounded-2xl">
-            <div className="flex flex-col gap-[30px] items-center mb">
-              <div className="voice-bg rounded-[10px] p-3 py-5">
-                <Image
-                  src="/icons/trend.svg"
-                  alt="trend"
-                  width={50}
-                  height={33}
-                />
+
+          {/* Combined Revenue Loss & Recovery Potential Card */}
+          <div className="bg-green-50 p-6 xl:p-8 rounded-2xl">
+            <div className="flex items-center justify-center mb-6">
+              <div className="voice-bg rounded-full p-4">
+                <TrendingUp className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-[40px] font-semibold text-[#19331B] leading-[44px]">
-                Total Annual Benefit
-              </h3>
             </div>
-            <div className="flex items-center justify-center w-full mt-8">
-              <div className="bg-green-700 text-center text-white rounded-[15px] font-semibold text-[36px] leading-[44px] p-[26px] mb-3 w-full lg:w-[330px]">
-                ${totalAnnualBenefit.toLocaleString()}
-                <p className="text-[18px] text-white font-medium">
-                  Revenue recovery potential
-                </p>
+            
+            <h3 className="text-2xl xl:text-3xl font-semibold text-slate-900 text-center mb-8">
+              Revenue Impact Analysis
+            </h3>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8">
+              {/* Monthly Loss Section */}
+              <div className="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl border border-red-200">
+                <div className="text-center">
+                  <div className="bg-red-600 rounded-full p-3 w-fit mx-auto mb-4">
+                    <TrendingUp className="w-6 h-6 text-white rotate-180" />
+                  </div>
+                  <h4 className="text-lg xl:text-xl font-semibold text-red-900 mb-3">
+                    Monthly Revenue Loss
+                  </h4>
+                  <div className="text-3xl xl:text-4xl font-bold text-red-600 mb-2">
+                    ${Math.round(totalMonthlyLoss).toLocaleString()}
+                  </div>
+                  <p className="text-sm text-red-700 font-medium">
+                    Lost due to missed calls & poor follow-up
+                  </p>
+                </div>
+              </div>
+
+              {/* Annual Recovery Section */}
+              <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border border-green-200">
+                <div className="text-center">
+                  <div className="bg-green-600 rounded-full p-3 py-4 w-fit shrink-0 mx-auto mb-4">
+                    <Image
+                      src="/icons/trend.svg"
+                      alt="trend"
+                      width={24}
+                      height={16}
+                      className="filter brightness-0 invert"
+                    />
+                  </div>
+                  <h4 className="text-lg xl:text-xl font-semibold text-green-900 mb-3">
+                    Annual Recovery Potential
+                  </h4>
+                  <div className="text-3xl xl:text-4xl font-bold text-green-600 mb-2">
+                    ${totalAnnualBenefit.toLocaleString()}
+                  </div>
+                  <p className="text-sm text-green-700 font-medium">
+                    With optimized processes
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Summary Stats */}
+            <div className="mt-6 pt-6 border-t border-slate-200">
+              <div className="grid grid-cols-2 gap-4 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-slate-700">
+                    {Math.round((totalMonthlyLoss / monthlyRevenue) * 100)}%
+                  </div>
+                  <div className="text-sm text-slate-600">Revenue at Risk</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-slate-700">
+                    {Math.round(missedCalls)}
+                  </div>
+                  <div className="text-sm text-slate-600">Missed Calls/Month</div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Revenue Recovery Card */}
-          {/* <div className="bg-green-50 p-6 rounded-2xl">
-            <div className="flex flex-col xl:flex-row items-center gap-[18px] justify-center xl:justify-between">
-              <div className="flex flex-col xl:flex-row items-center gap-[18px]">
-                <div className="voice-bg rounded-[10px] p-3">
-                  <Image
-                    src="/icons/cash.svg"
-                    alt="trend"
-                    width={50}
-                    height={50}
-                  />
-                </div>
-                <div className="text-center xl:text-left">
-                  <h3 className="text-[40px] font-semibold text-[#19331B] leading-[44px]">
-                    Revenue Recovery
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    Annual potential with agent
-                  </p>
+          {/* Detailed Recovery Opportunities */}
+          <div className="bg-green-50 p-6 rounded-2xl">
+            <h3 className="text-2xl xl:text-3xl font-semibold text-gray-900 mb-6 text-center">
+              Recovery Opportunities Breakdown
+            </h3>
+            <div className="space-y-4">
+              {/* Missed Call Recovery */}
+              <div className="bg-white p-4 rounded-xl">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-red-100 p-2 rounded-lg">
+                      <Phone className="w-5 h-5 text-red-600" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Missed Call Recovery</h4>
+                      <p className="text-sm text-gray-600">
+                        {Math.round(missedCallRate)}% missed calls × {conversionRate * 100}% conversion
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-lg font-bold text-red-600">
+                      -${Math.round(missedCallLoss).toLocaleString()}
+                    </div>
+                    <div className="text-sm text-gray-500">per month</div>
+                  </div>
                 </div>
               </div>
-              <div className="text-3xl font-semibold text-green-800">
-                ${revenueRecovery.toLocaleString()}
-              </div>
-            </div>
-          </div> */}
 
-          {/* Quick Impact Stats Card */}
-          {/* <div className="bg-green-50 p-6 rounded-2xl">
-            <div className="flex flex-col md:flex-row items-center justify-between">
-              <div>
-                <div className="flex items-center mb-4">
-                  <h3 className="text-[40px] font-semibold text-[#19331B] leading-[44px]">
-                    Quick Impact Stats
-                  </h3>
-                </div>
-                <div className="space-y-3">
-                  <p className="text-xl font-semibold text-gray-500 flex items-center justify-between">
-                    Missed calls per week:
-                    <span className="font-semibold text-3xl text-[#19331B]">
-                      {Math.round(missedCallsPerWeek)}
-                    </span>
-                  </p>
-                  <div className="w-full h-[1px] bg-green-700"></div>
-                  <p className="text-xl font-semibold text-gray-500 flex items-center justify-between">
-                    Missed calls per year:
-                    <span className="font-semibold text-3xl text-[#19331B]">
-                      {Math.round(missedCallsPerYear)}
-                    </span>
-                  </p>
+              {/* Follow-up Recovery */}
+              <div className="bg-white p-4 rounded-xl">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-orange-100 p-2 rounded-lg">
+                      <MessageSquare className="w-5 h-5 text-orange-600" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Follow-up Recovery</h4>
+                      <p className="text-sm text-gray-600">
+                        {Math.round(100 - followUpRate)}% lack follow-up × {followUpConversionRate * 100}% conversion
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-lg font-bold text-orange-600">
+                      -${Math.round(potentialFollowupRecovery).toLocaleString()}
+                    </div>
+                    <div className="text-sm text-gray-500">per month</div>
+                  </div>
                 </div>
               </div>
-              <div className="flex items-center justify-center w-[230px] mt-5 xl:mt-0">
-                <div className="bg-green-700 text-center text-white rounded-[15px] font-semibold text-[36px] leading-[44px] p-[26px] w-[230px]">
-                  <p className="text-[18px] text-white font-medium leading-[22px] mb-3">
-                    Monthly recovery potential
-                  </p>
-                  ${Math.round(monthlyRecoveryPotential).toLocaleString()}
+
+              {/* Response Time Impact */}
+              <div className="bg-white p-4 rounded-xl">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className={`p-2 rounded-lg ${responseTime <= 60 ? 'bg-green-100' : responseTime <= 240 ? 'bg-yellow-100' : 'bg-red-100'}`}>
+                      <Clock className={`w-5 h-5 ${responseTime <= 60 ? 'text-green-600' : responseTime <= 240 ? 'text-yellow-600' : 'text-red-600'}`} />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Response Time Impact</h4>
+                      <p className="text-sm text-gray-600">
+                        {responseTime} min response time - {responseTime <= 15 ? 'Excellent' : responseTime <= 60 ? 'Good' : responseTime <= 240 ? 'Slow' : 'Critical'}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className={`text-lg font-bold ${responseTime <= 60 ? 'text-green-600' : responseTime <= 240 ? 'text-yellow-600' : 'text-red-600'}`}>
+                      {responseTimeScore}%
+                    </div>
+                    <div className="text-sm text-gray-500">efficiency</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
