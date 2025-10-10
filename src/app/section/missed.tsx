@@ -100,7 +100,7 @@ export default function Missed() {
                 <VoiceCallButton
                   className="scale-75 lg:absolute lg:-left-16"
                   apiKey="5c2e1220-d870-46c4-9088-240fb4a0c7cb"
-                  assistantId="e83457ac-5b83-4293-b68d-3057cab52a16"
+                  assistantId="ead8169d-c224-4ab6-8b3d-6d0d6570b16b"
                 />
               </div>
             </div>
