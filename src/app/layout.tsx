@@ -75,6 +75,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" />
+        <Script defer src="https://umami.hvacvoice.com/script.js" data-website-id="f40a2af5-b867-41e0-afb0-01d11a37d964"></Script>
       </head>
       <body className="antialiased">
         <Navbar />
